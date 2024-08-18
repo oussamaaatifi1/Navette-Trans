@@ -62,7 +62,8 @@ Le projet de plateforme de transport pour employés et voyages spécifiques vise
 
 ### 1. Diagramme de Cas d'Utilisation
 
-![Diagramme de Cas d'Utilisation](https://github.com/user-attachments/assets/fa6ad479-ec96-4fc6-b085-4288312e394a)
+![Diagramme de Cas d'Utilisation]![image](https://github.com/user-attachments/assets/6bf4c56f-92ae-4d2c-b837-df347797cef9)
+
 
 
 
