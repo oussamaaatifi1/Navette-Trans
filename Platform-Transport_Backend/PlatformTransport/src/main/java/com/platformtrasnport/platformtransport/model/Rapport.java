@@ -1,10 +1,15 @@
 package com.platformtrasnport.platformtransport.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
 public class Rapport {
 
     @Id
@@ -14,7 +19,6 @@ public class Rapport {
     private String contenu;
 
     @Temporal(TemporalType.DATE)
-    private Date date;
-
+    private LocalDate dateRapport;
 
 }
