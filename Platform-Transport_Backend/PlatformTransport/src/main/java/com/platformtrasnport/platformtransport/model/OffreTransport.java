@@ -1,28 +1,31 @@
-package com.platformtrasnport.platformtransport.model;
+    package com.platformtrasnport.platformtransport.model;
 
-import com.platformtrasnport.platformtransport.model.enul.TypeOffreTransport;
-import jakarta.persistence.*;
+    import com.platformtrasnport.platformtransport.model.enul.TypeOffreTransport;
+    import jakarta.persistence.*;
+    import lombok.Getter;
+    import lombok.Setter;
 
-import java.util.Date;
+    import java.time.LocalDate;
+    import java.util.Date;
 
-@Entity
-public class OffreTransport {
+    @Entity
+    @Getter
+    @Setter
+    public class OffreTransport {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private TypeOffreTransport type;
+        @Enumerated(EnumType.STRING)
+        private TypeOffreTransport typeOffreTransport;
 
-    private String pointDepart;
-    private String destination;
+        private String pointDepart;
+        private String destination;
 
-    @Temporal(TemporalType.DATE)
-    private Date date;
+        private LocalDate dateOffre;
 
-    private int nombrePlaces;
-    private float prix;
-
-
-}
+        private int nombrePlaces;
+        private float prix;
+        private String imgUrl;
+    }
