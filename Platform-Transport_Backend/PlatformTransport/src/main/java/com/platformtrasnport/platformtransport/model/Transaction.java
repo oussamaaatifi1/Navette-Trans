@@ -1,23 +1,29 @@
-package com.platformtrasnport.platformtransport.model;
+    package com.platformtrasnport.platformtransport.model;
 
-import jakarta.persistence.*;
+    import jakarta.persistence.*;
+    import lombok.Getter;
+    import lombok.Setter;
 
-import java.util.Date;
+    import java.util.Date;
 
-@Entity
-public class Transaction {
+    @Entity
+    @Getter
+    @Setter
+    public class Transaction {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    private float montant;
+        private float montant;
 
-    @Temporal(TemporalType.DATE)
-    private Date date;
+        @Temporal(TemporalType.DATE)
+        private Date date;
 
-    @ManyToOne
-    @JoinColumn(name = "utilisateur_id")
-    private Utilisateur utilisateur;
+        @ManyToOne
+        @JoinColumn(name = "utilisateur_id")
+        private Employe employe;
 
-}
+        @OneToOne(mappedBy = "transaction")
+        private Reservation reservation;
+    }
