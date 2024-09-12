@@ -1,0 +1,117 @@
+<body class="bg-gray-100">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://dreamsrent.dreamstechnologies.com/html/template/assets/img/logo.svg" alt="Car icon" class="mr-2 w-12 h-auto">
+                <span class="font-bold text-xl">DREAMS RENT</span>
+            </div>
+            <nav>
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="#" class="nav-link text-blue-500">Home</a></li>
+                    <li><a href="#" class="nav-link text-gray-600">Listings</a></li>
+                    <li><a href="#" class="nav-link text-gray-600">User</a></li>
+                    <li><a href="#" class="nav-link text-gray-600">Pages</a></li>
+                    <li><a href="#" class="nav-link text-gray-600">Blog</a></li>
+                    <li><a href="#" class="nav-link text-gray-600">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="flex space-x-2">
+                <button class="px-4 py-2 border border-gray-300 rounded text-gray-700 bg-gray-50 hover:bg-gray-200 transition transform hover:scale-105 sm:px-2 sm:text-sm">
+                    Sign In
+                </button>
+                <button class="px-4 py-2 bg-blue-500 text-white rounded color-transition sm:px-2 sm:text-sm">
+                    Sign Up
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row items-center">
+            <div class="lg:w-1/2 pr-8 mb-8 lg:mb-0">
+                <div class="mb-4">
+                    <span class="bg-blue-100 text-blue-500 px-3 py-1 rounded-full text-sm">100% Trusted car rental platform in the World</span>
+                </div>
+                <h1 class="text-4xl lg:text-5xl font-bold mb-4">
+                    Find Your Best
+                    <span class="block text-blue-500">Dream Car for Rental</span>
+                </h1>
+                <p class="text-gray-600 mb-6">
+                    Experience the ultimate in comfort, performance, and sophistication with our luxury
+                    car rentals. From sleek sedans and stylish coupes to spacious SUVs and elegant
+                    convertibles, we offer a range of premium vehicles to suit your preferences and
+                    lifestyle.
+                </p>
+                <button class="px-6 py-3 bg-gray-800 text-white rounded-full hover:bg-gray-700 transition">
+                    View all Cars →
+                </button>
+            </div>
+            <div class="lg:w-1/2 relative">
+                <div class="absolute inset-0 transform -skew-y-6 z-0"></div>
+                <img src="https://dreamsrent.dreamstechnologies.com/html/template/assets/img/car-right.png" alt="Luxury SUV" class="relative z-10 w-full h-auto">
+            </div>
+        </div>
+
+        <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+            <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="col-span-1 md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Depart Location</label>
+                    <div class="relative">
+                        <input type="text" placeholder="Enter City, Airport, or Address" class="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <svg class="w-5 h-5 text-gray-400 absolute right-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="col-span-1 md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Destination Location</label>
+                    <div class="relative">
+                        <input type="text" placeholder="Enter City, Airport, or Address" class="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <svg class="w-5 h-5 text-gray-400 absolute right-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Pickup Date</label>
+                    <div class="relative">
+                        <input type="date" value="2023-04-11" class="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Return Date</label>
+                    <div class="relative">
+                        <input type="date" value="2023-04-11" class="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <div class="flex items-end">
+                    <button type="submit" class="w-full bg-blue-500 text-white py-3 px-4 rounded-md hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const body = document.body;
+
+            if (scrollPosition > 50) {
+                body.classList.add('scrolled');
+            } else {
+                body.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>

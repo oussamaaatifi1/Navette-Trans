@@ -1,0 +1,21 @@
+<!-- <app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main class="p-4 sm:ml-64 pt-20">
+<div *ngIf="reservations.length > 0; else noReservations">
+  <div *ngFor="let reservation of reservations" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md mb-4">
+    <div class="p-5">
+      <h5 class="text-xl font-bold tracking-tight text-gray-900">Reservation ID: {{ reservation.id }}</h5>
+      <p class="text-gray-700 mb-3">Date: {{ reservation.dateReservation }}</p>
+      <p class="text-gray-700 mb-3">Employee: {{ reservation.employe.nom }}</p> 
+      <p class="text-gray-700 mb-3">Transport Offer: {{ reservation.offre.typeOffreTransport }} from {{ reservation.offre.pointDepart }} to {{ reservation.offre.destination }}</p>
+      <p class="text-gray-700 mb-3">Transaction ID: {{ reservation.transaction?.id }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #noReservations>
+  <p class="text-gray-700">No reservations found.</p>
+</ng-template>
+
+</main> -->

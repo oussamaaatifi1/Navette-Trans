@@ -1,0 +1,32 @@
+<aside id="logo-sidebar"
+    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-blue-800 border-r border-blue-700 sm:translate-x-0"
+    aria-label="Sidebar">
+    <div class="h-full px-3 pb-4 overflow-y-auto bg-blue-800">
+        <ul class="space-y-2 font-medium">
+            <li *ngIf="isAdmin()">
+                <a (click)="loadContent('admin-count')" [ngClass]="{'bg-blue-700': currentSection === 'admin-count'}"
+                    class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
+                    <span class="ms-3">Dashboard</span>
+                </a>
+            </li>
+            <li *ngIf="isAdmin()">
+                <a (click)="loadContent('offrebyadmin')" [ngClass]="{'bg-blue-700': currentSection === 'offrebyadmin'}"
+                    class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
+                    <span class="flex-1 ms-3 whitespace-nowrap">Management Offers</span>
+               </a>
+            </li>
+            <li *ngIf="isAdmin()">
+                <a (click)="loadContent('listemploye')" [ngClass]="{'bg-blue-700': currentSection === 'listemploye'}"
+                    class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
+                    <span class="flex-1 ms-3 whitespace-nowrap">List Employes</span>
+                </a>
+            </li>
+            <li *ngIf="isAdmin()">
+                <a (click)="loadContent('listemployeur')" [ngClass]="{'bg-blue-700': currentSection === 'listemployeur'}"
+                    class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
+                    <span class="flex-1 ms-3 whitespace-nowrap">List employeur</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>

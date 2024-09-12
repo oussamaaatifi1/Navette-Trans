@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+<div class="max-w-2xl mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-4">Create New Offer</h2>
+    <form [formGroup]="offreForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <label for="typeOffreTransport" class="block text-sm font-medium text-gray-700">Type of Offer</label>
+        <select id="typeOffreTransport" formControlName="typeOffreTransport" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+          <option value="" disabled>Select type</option>
+          <option *ngFor="let type of typeOffreTransportOptions" [value]="type">{{ type }}</option>
+        </select>
+        <div *ngIf="offreForm.get('typeOffreTransport')?.invalid && offreForm.get('typeOffreTransport')?.touched" class="text-red-600 text-sm">
+          Type of offer is required.
+        </div>
+      </div>
+      
+      <div>
+        <label for="pointDepart" class="block text-sm font-medium text-gray-700">Departure Point</label>
+        <input id="pointDepart" formControlName="pointDepart" type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+        <div *ngIf="offreForm.get('pointDepart')?.invalid && offreForm.get('pointDepart')?.touched" class="text-red-600 text-sm">
+          Departure point is required.
+        </div>
+      </div>
+    
+      <div>
+        <label for="destination" class="block text-sm font-medium text-gray-700">Destination</label>
+        <input id="destination" formControlName="destination" type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+        <div *ngIf="offreForm.get('destination')?.invalid && offreForm.get('destination')?.touched" class="text-red-600 text-sm">
+          Destination is required.
+        </div>
+      </div>
+    
+      <div>
+        <label for="dateOffre" class="block text-sm font-medium text-gray-700">Offer Date</label>
+        <input id="dateOffre" formControlName="dateOffre" type="date" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+        <div *ngIf="offreForm.get('dateOffre')?.invalid && offreForm.get('dateOffre')?.touched" class="text-red-600 text-sm">
+          Offer date is required.
+        </div>
+      </div>
+    
+      <div>
+        <label for="nombrePlaces" class="block text-sm font-medium text-gray-700">Number of Places</label>
+        <input id="nombrePlaces" formControlName="nombrePlaces" type="number" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+        <div *ngIf="offreForm.get('nombrePlaces')?.invalid && offreForm.get('nombrePlaces')?.touched" class="text-red-600 text-sm">
+          Number of places must be at least 1.
+        </div>
+      </div>
+    
+      <div>
+        <label for="prix" class="block text-sm font-medium text-gray-700">Price</label>
+        <input id="prix" formControlName="prix" type="number" step="0.01" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+        <div *ngIf="offreForm.get('prix')?.invalid && offreForm.get('prix')?.touched" class="text-red-600 text-sm">
+          Price must be a non-negative number.
+        </div>
+      </div>
+    
+      <div>
+        <label for="imgUrl" class="block text-sm font-medium text-gray-700">Image URL</label>
+        <input id="imgUrl" formControlName="imgUrl" type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+        <div *ngIf="offreForm.get('imgUrl')?.invalid && offreForm.get('imgUrl')?.touched" class="text-red-600 text-sm">
+          Image URL is required.
+        </div>
+      </div>
+    
+      <button type="submit" [disabled]="offreForm.invalid" class="bg-blue-500 text-white px-4 py-2 rounded-md">Create Offer</button>
+    </form>
+  </div>
+  

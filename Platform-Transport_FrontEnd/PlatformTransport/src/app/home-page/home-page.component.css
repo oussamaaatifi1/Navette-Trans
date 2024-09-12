@@ -1,0 +1,82 @@
+.bg-orange-500 { background-color: #f97316; }
+        .text-orange-500 { color: #f97316; }
+        .border-orange-500 { border-color: #f97316; }
+
+
+        /* Initial styles for buttons */
+button {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Initial state */
+.sign-in-btn {
+    background-color: white;
+    color: gray;
+    border: 1px solid gray;
+}
+
+.sign-up-btn {
+    background-color: orange;
+    color: white;
+}
+
+/* State when scrolled */
+.scrolled .sign-in-btn {
+    background-color: gray;
+    color: white;
+    border-color: transparent;
+}
+
+.scrolled .sign-up-btn {
+    background-color: white;
+    color: orange;
+    border: 1px solid orange;
+}
+
+
+@keyframes colorTransition {
+    0% { background-color: #d1d5db; } /* Gray */
+    50% { background-color: #3b82f6; } /* Blue */
+    100% { background-color: #10b981; } /* Green */
+}
+
+.color-transition {
+    animation: colorTransition 3s infinite;
+}
+
+.color-transition:hover {
+    animation: none; /* Stop animation on hover for a smoother effect */
+    background-color: #10b981; /* Green */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+
+.nav-link {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem; /* Space for the underline */
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #3b82f6; /* Blue color */
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+header {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.scrolled header {
+    background-color: #f1f5f9; /* Light gray background when scrolled */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+}

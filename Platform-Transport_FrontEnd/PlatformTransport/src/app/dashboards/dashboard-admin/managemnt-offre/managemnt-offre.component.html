@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main class="p-4 sm:ml-64 pt-20 bg-gray-50 text-gray-900 flex flex-col h-screen">
+    <div class="flex-grow overflow-x-auto">
+        <table class="min-w-full border-collapse bg-white text-gray-900 shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-gray-200 border-b border-gray-300">
+                <tr>
+                    <th class="p-3 text-left font-semibold text-gray-600">Image</th>
+                    <th class="p-3 text-left font-semibold text-gray-600">Offer Type</th>
+                    <th class="p-3 text-left font-semibold text-gray-600">From</th>
+                    <th class="p-3 text-left font-semibold text-gray-600">To</th>
+                    <th class="p-3 text-left font-semibold text-gray-600">Date</th>
+                    <th class="p-3 text-left font-semibold text-gray-600">Seats Available</th>
+                    <th class="p-3 text-left font-semibold text-gray-600">Price</th>
+                    <th class="p-3 text-left font-semibold text-gray-600">Status</th>
+                    <th class="p-3 text-left font-semibold text-gray-600">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let offre of offretransport"
+                    class="border-b border-gray-300 hover:bg-gray-50 transition-colors">
+                    <td class="p-3">
+                        <img [src]="offre.imgUrl" alt="Image for {{ offre.typeOffreTransport }}"
+                            class="w-16 h-16 rounded-lg shadow-sm" />
+                    </td>
+                    <td class="p-3 truncate">{{ offre.typeOffreTransport }}</td>
+                    <td class="p-3 truncate">{{ offre.pointDepart }}</td>
+                    <td class="p-3 truncate">{{ offre.destination }}</td>
+                    <td class="p-3">{{ offre.dateOffre | date:'shortDate' }}</td>
+                    <td class="p-3">{{ offre.nombrePlaces }}</td>
+                    <td class="p-3">{{ offre.prix | currency:'USD' }}</td>
+                    <td class="p-3">
+                        <span class="px-3 py-1 text-xs font-semibold rounded-full" [ngClass]="{
+                'bg-yellow-200 text-yellow-800': offre.status === 'PENDING',
+                'bg-green-200 text-green-800': offre.status === 'APPROVED',
+                'bg-red-200 text-red-800': offre.status === 'REJECTED'
+              }">
+                            {{ offre.status }}
+                        </span>
+                    </td>
+                    <td class="p-3 flex space-x-2">
+                        <button (click)="updateOffreTransport(offre.id ?? 0)"
+                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 transition-colors">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button (click)="deleteOffreTransport(offre.id ?? 0)"
+                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 transition-colors">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

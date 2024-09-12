@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+<main class="p-4 sm:ml-64 pt-20">
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 p-6 max-w-4xl mx-auto">
+
+        <!-- User Count -->
+        <div class="bg-blue-50 p-6 rounded-lg shadow-md flex items-center justify-between">
+            <div class="flex flex-col">
+                <h2 class="text-2xl font-bold text-blue-800">User Count</h2>
+                <p class="text-lg text-blue-600">{{administrateurCount}}</p>
+            </div>
+            <div class="text-4xl text-blue-500">
+                <!-- Font Awesome Icon -->
+                <i class="fas fa-users"></i>
+            </div>
+        </div>
+
+        <!-- Reservation Count -->
+        <div class="bg-green-50 p-6 rounded-lg shadow-md flex items-center justify-between">
+            <div class="flex flex-col">
+                <h2 class="text-2xl font-bold text-green-800">Reservation Count</h2>
+                <p class="text-lg text-green-600">456</p>
+            </div>
+            <div class="text-4xl text-green-500">
+                <!-- Font Awesome Icon -->
+                <i class="fas fa-calendar-check"></i>
+            </div>
+        </div>
+
+        <!-- Amount -->
+        <div class="bg-red-50 p-6 rounded-lg shadow-md flex items-center justify-between">
+            <div class="flex flex-col">
+                <h2 class="text-2xl font-bold text-red-800">Amount</h2>
+                <p class="text-lg text-red-600">$7890</p>
+            </div>
+            <div class="text-4xl text-red-500">
+                <!-- Font Awesome Icon -->
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Font Awesome Icons (Optional) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://unpkg.com/flowbite@1.6.1/dist/flowbite.js"></script>
+    
+</main>
+
