@@ -1,20 +1,31 @@
 package com.platformtrasnport.platformtransport.service;
 
-import com.platformtrasnport.platformtransport.model.OffreTransport;
-import com.platformtrasnport.platformtransport.repository.OffreTransportRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.platformtrasnport.platformtransport.dto.OffreTransportDto;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public interface OffreTransportService {
 
-    public OffreTransport createOffreTransport(OffreTransport offreTransport);
+    OffreTransportDto createOffreTransport(OffreTransportDto offreTransportDto);
 
-    public Optional<OffreTransport> findById(Long id);
+    Optional<OffreTransportDto> findById(Long id);
 
+    OffreTransportDto rejectOffre(Long id);
+
+    OffreTransportDto approveOffre(Long id);
+
+    List<OffreTransportDto> findPendingOffres();
+
+    List<OffreTransportDto> findApprovedOffres();
+
+    void deleteOffreTransport(Long id);
+
+    List<OffreTransportDto> findAllOffres();
+
+    List<OffreTransportDto> findRejectedOffres();
+
+    OffreTransportDto updateOffreTransport(Long id, OffreTransportDto offreTransportDto);
 }

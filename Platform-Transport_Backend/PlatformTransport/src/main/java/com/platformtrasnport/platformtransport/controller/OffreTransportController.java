@@ -1,12 +1,12 @@
 package com.platformtrasnport.platformtransport.controller;
 
-import com.platformtrasnport.platformtransport.model.OffreTransport;
-import com.platformtrasnport.platformtransport.repository.OffreTransportRepository;
+import com.platformtrasnport.platformtransport.dto.OffreTransportDto;
 import com.platformtrasnport.platformtransport.service.OffreTransportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,54 +14,61 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/offres-transport")
-@CrossOrigin(origins = "http://localhost:4200/")
 public class OffreTransportController {
 
     @Autowired
     private OffreTransportService offreTransportService;
 
-    @Autowired
-    private OffreTransportRepository offreTransportRepository;
-
-
     @GetMapping("/all")
-    public List<OffreTransport> getallOffreTransports() {
-        return offreTransportRepository.findAll();
+    public List<OffreTransportDto> getAllOffreTransports() {
+        return offreTransportService.findPendingOffres();
     }
 
     @PostMapping("/add")
-    public OffreTransport createOffreTransport(@RequestBody OffreTransport offreTransport) {
-        return offreTransportService.createOffreTransport(offreTransport);
+    public OffreTransportDto createOffreTransport(@RequestBody OffreTransportDto offreTransportDto) {
+        return offreTransportService.createOffreTransport(offreTransportDto);
     }
 
-
-    @GetMapping("/OffreTransport/{id}")
-    public ResponseEntity<OffreTransport> editOffreTransport(@PathVariable long id) {
-            OffreTransport offreTransport = offreTransportRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Offre Transport Not Found id " + id));
-        return ResponseEntity.ok(offreTransport);
+    @GetMapping("/{id}")
+    public ResponseEntity<OffreTransportDto> getOffreTransport(@PathVariable Long id) {
+        OffreTransportDto offreTransportDto = offreTransportService.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Offre Transport Not Found id " + id));
+        return ResponseEntity.ok(offreTransportDto);
     }
 
-    @PutMapping("/OffreTransport/{id}")
-    public ResponseEntity<OffreTransport> updateOffreTransport(@PathVariable long id ,@RequestBody OffreTransport offreTransport){
-        OffreTransport offreTransports = offreTransportRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Offre Transport Not Found id " + id));
-        offreTransports.setPointDepart(offreTransport.getPointDepart());
-        offreTransports.setDestination(offreTransport.getDestination());
-        offreTransports.setDateOffre(offreTransport.getDateOffre());
-        offreTransports.setNombrePlaces(offreTransport.getNombrePlaces());
-        offreTransports.setTypeOffreTransport(offreTransport.getTypeOffreTransport());
-        offreTransports.setPrix(offreTransport.getPrix());
-
-        OffreTransport offreTransportup  = offreTransportRepository.save(offreTransport);
-        return ResponseEntity.ok(offreTransportup);
+    @PutMapping("/{id}")
+    public ResponseEntity<OffreTransportDto> updateOffreTransport(@PathVariable Long id, @RequestBody OffreTransportDto offreTransportDto) {
+        OffreTransportDto updatedOffreTransportDto = offreTransportService.updateOffreTransport(id, offreTransportDto);
+        return ResponseEntity.ok(updatedOffreTransportDto);
     }
 
-    @DeleteMapping("/OffreTransport/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteOffreTransport(@PathVariable long id){
-        OffreTransport offreTransport = offreTransportRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Delete Offre Transport is id " + id));
-        offreTransportRepository.delete(offreTransport);
-        Map<String,Boolean> response= new HashMap<>();
-        response.put("delete",Boolean.TRUE);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, Boolean>> deleteOffreTransport(@PathVariable Long id) {
+        offreTransportService.deleteOffreTransport(id);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/approved")
+    public List<OffreTransportDto> getApprovedOffreTransports() {
+        return offreTransportService.findApprovedOffres();
+    }
+
+    @GetMapping("/rejected")
+    public List<OffreTransportDto> getRejectedOffreTransports() {
+        return offreTransportService.findRejectedOffres();
+    }
+
+    @PutMapping("/{id}/approve")
+    public ResponseEntity<OffreTransportDto> approveOffre(@PathVariable Long id) {
+        OffreTransportDto approvedOffreTransportDto = offreTransportService.approveOffre(id);
+        return ResponseEntity.ok(approvedOffreTransportDto);
+    }
+
+    @PutMapping("/{id}/reject")
+    public ResponseEntity<OffreTransportDto> rejectOffre(@PathVariable Long id) {
+        OffreTransportDto rejectedOffreTransportDto = offreTransportService.rejectOffre(id);
+        return ResponseEntity.ok(rejectedOffreTransportDto);
+    }
 }
