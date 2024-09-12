@@ -1,5 +1,7 @@
     package com.platformtrasnport.platformtransport.model;
 
+    import com.platformtrasnport.platformtransport.model.enul.OffreStatus;
+    import com.platformtrasnport.platformtransport.model.enul.RejectionReason;
     import com.platformtrasnport.platformtransport.model.enul.TypeOffreTransport;
     import jakarta.persistence.*;
     import lombok.Getter;
@@ -28,4 +30,6 @@
         private int nombrePlaces;
         private float prix;
         private String imgUrl;
+        private OffreStatus status;
+        private RejectionReason rejectionReason;
     }

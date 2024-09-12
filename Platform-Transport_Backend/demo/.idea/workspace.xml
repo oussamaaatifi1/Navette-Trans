@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="84d390eb-71b6-4776-8d57-a09b1a2f73bc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/auth/AuthenticationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/auth/AuthenticationResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/auth/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/config/ApplicationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/config/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/config/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/controller/AdministrateurController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/controller/AuthenticationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/controller/OffreTransportController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/controller/ReservationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/controller/TransactionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/controller/UtilisateurController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/repository/AdministrateurRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/repository/EmployeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/repository/EmployeurRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/repository/OffreTransportRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/repository/ParticulierRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/repository/RapportRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/repository/ReservationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/repository/TransactionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/repository/UtilisateurRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/AdministrateurService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/AuthenticationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/EmployeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/Impl/AdministrateurServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/Impl/EmployeServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/Impl/OffreTransportServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/Impl/ReservationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/Impl/TransactionServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/Impl/UtilisateurServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/OffreTransportService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/ReservationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/TransactionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/service/UtilisateurService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/PlatformTransportApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/PlatformTransportApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Administrateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Administrateur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Employe.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Employe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Employeur.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Employeur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/OffreCovoiturage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/OffreTransport.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/OffreTransport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Particulier.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Particulier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Rapport.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Rapport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Utilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/Utilisateur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/enul/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/java/com/platformtrasnport/platformtransport/model/enul/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PlatformTransport/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../PlatformTransport/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2lVZN8qPn84FR0qK2cVZPYuHrgc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/user/Desktop/demo",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="demo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demo.DemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="84d390eb-71b6-4776-8d57-a09b1a2f73bc" name="Changes" comment="" />
+      <created>1725267162889</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1725267162889</updated>
+      <workItem from="1725267164030" duration="47000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

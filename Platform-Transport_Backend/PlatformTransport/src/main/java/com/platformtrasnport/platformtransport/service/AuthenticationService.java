@@ -53,7 +53,7 @@ public class AuthenticationService {
         Utilisateur employe = new Employe();
         employe.setNom(request.getNom());
         employe.setEmail(request.getEmail());
-        employe.setPassword(passwordEncoder.encode(request.getPassword())); // Ensure correct field name
+        employe.setPassword(passwordEncoder.encode(request.getPassword()));
         employe.setRole(Role.EMPLOYE);
         userdao.save(employe);
 
