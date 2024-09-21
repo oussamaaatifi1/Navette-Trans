@@ -1,6 +1,5 @@
 package com.platformtrasnport.platformtransport.service.Impl;
 
-import com.platformtrasnport.platformtransport.dto.EmployeurDto;
 import com.platformtrasnport.platformtransport.mapper.EmployeurMapper;
 import com.platformtrasnport.platformtransport.model.Employeur;
 import com.platformtrasnport.platformtransport.repository.EmployeurRepository;
@@ -14,38 +13,48 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmployeurServiceImpl implements EmployeurService {
+
     @Autowired
     private EmployeurRepository employeurRepository;
 
-    @Autowired
-    private EmployeurMapper employeurMapper;
+//    @Autowired
+//    private EmployeurMapper employeurMapper;
 
     @Override
-    public List<EmployeurDto> getAllEmployeurs() {
-        return employeurRepository.findAll().stream()
-                .map(employeurMapper::employeurToDto)
-                .collect(Collectors.toList());
-    }
+    public List<Employeur> getAllEmployeurs() {
+        return employeurRepository.findAll();
 
-    @Override
-    public Optional<EmployeurDto> updateEmployeur(Long id, EmployeurDto employeurDto) {
-        if (employeurRepository.existsById(id)) {
-            Employeur employeur = employeurMapper.dtoToEmployeur(employeurDto);
-            employeur.setId(id);
-            Employeur updatedEmployeur = employeurRepository.save(employeur);
-            return Optional.of(employeurMapper.employeurToDto(updatedEmployeur));
-        } else {
-            return Optional.empty();
-        }
     }
+    }
+//    @Override
+//    public EmployeurDto createEmployeur(EmployeurDto employeurDto) {
+//        Employeur employeur = employeurMapper.dtoToEmployeur(employeurDto);
+//        Employeur createdEmployeur = employeurRepository.save(employeur);
+//        return employeurMapper.employeurToDto(createdEmployeur);
+//    }
+//
+//    @Override
+//    public Optional<EmployeurDto> getEmployeurById(Long id) {
+//        return employeurRepository.findById(id)
+//                .map(employeurMapper::employeurToDto);
+//    }
+//
+//    @Override
+//    public Optional<EmployeurDto> updateEmployeur(Long id, EmployeurDto employeurDto) {
+//        return employeurRepository.findById(id).map(existingEmployeur -> {
+//            Employeur updatedEmployeur = employeurMapper.dtoToEmployeur(employeurDto);
+//            updatedEmployeur.setId(id);
+//            employeurRepository.save(updatedEmployeur);
+//            return employeurMapper.employeurToDto(updatedEmployeur);
+//        });
+//    }
+//
+//    @Override
+//    public boolean deleteEmployeur(Long id) {
+//        if (employeurRepository.existsById(id)) {
+//            employeurRepository.deleteById(id);
+//            return true;
+//        }
+//        return false;
+//    }
 
-    @Override
-    public boolean deleteEmployeur(Long id) {
-        if (employeurRepository.existsById(id)) {
-            employeurRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
-    }
-}

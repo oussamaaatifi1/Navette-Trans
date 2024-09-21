@@ -1,16 +1,22 @@
 package com.platformtrasnport.platformtransport.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
-import jakarta.persistence.DiscriminatorValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @DiscriminatorValue("Employeur")
 public class Employeur extends Utilisateur {
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "offretansport_id")
+    private List<OffreTransport> offreTransport;
+
+
 }

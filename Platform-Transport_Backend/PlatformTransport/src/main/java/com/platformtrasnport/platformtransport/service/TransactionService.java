@@ -1,13 +1,14 @@
 package com.platformtrasnport.platformtransport.service;
 
-import com.platformtrasnport.platformtransport.model.Transaction;
+import com.platformtrasnport.platformtransport.dto.TransactionDto;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface TransactionService {
-    Transaction createTransaction(Transaction transaction);
-    Optional<Transaction> getTransactionById(Long id);
-    Iterable<Transaction> getAllTransactions();
-    Transaction updateTransaction(Long id, Transaction updatedTransaction);
+    TransactionDto createTransaction(TransactionDto transactionDto);
+    Optional<TransactionDto> getTransactionById(Long id);
+    List<TransactionDto> getAllTransactions();
+    TransactionDto updateTransaction(Long id, TransactionDto updatedTransactionDto);
     void deleteTransaction(Long id);
 }

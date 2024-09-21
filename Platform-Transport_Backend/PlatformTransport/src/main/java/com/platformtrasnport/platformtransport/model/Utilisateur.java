@@ -27,6 +27,7 @@ public class Utilisateur implements UserDetails  {
     private Long id;
     private String nom;
     private String prenom;
+    @Column(unique = true)
     private String email;
     private String password;
     private String imgUrl;
@@ -72,6 +73,7 @@ public class Utilisateur implements UserDetails  {
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
+
 
 
 }

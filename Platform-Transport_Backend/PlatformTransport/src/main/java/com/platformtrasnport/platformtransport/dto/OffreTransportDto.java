@@ -21,5 +21,6 @@ public class OffreTransportDto {
     private float prix;
     private String imgUrl;
     private OffreStatus status;
-//    private RejectionReason rejectionReason;
+    private Long employeurId;
+
 }

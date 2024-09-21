@@ -26,20 +26,20 @@
         <label for="imgUrl" class="block text-sm font-medium text-gray-700 mt-4">Image URL</label>
         <input id="imgUrl" formControlName="imgUrl" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500" />
 
-        <label for="status" class="block text-sm font-medium text-gray-700 mt-4">Status</label>
+        <!-- <label for="status" class="block text-sm font-medium text-gray-700 mt-4">Status</label>
         <select id="status" formControlName="status" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900">
           <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
-        </select>
+        </select> -->
 
         <button type="submit" class="mt-6 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300">
           Update
         </button>
 
         <!-- Approve and Reject Buttons -->
-        <button type="button" (click)="approve()" class="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300">
+        <button *ngIf="isAdmin()" type="button" (click)="approve()" class="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300">
           Approve
         </button>
-        <button type="button" (click)="reject()" class="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300">
+        <button *ngIf="isAdmin()" type="button" (click)="reject()" class="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300">
           Reject
         </button>
       </div>

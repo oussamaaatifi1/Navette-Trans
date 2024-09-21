@@ -5,10 +5,9 @@ import com.platformtrasnport.platformtransport.model.Employeur;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-//@Mapper(componentModel = "spring", uses = {UtilisateurMapper.class})
+@Mapper(componentModel = "spring")
 public interface EmployeurMapper {
-    EmployeurMapper INSTANCE = Mappers.getMapper(EmployeurMapper.class);
-
     EmployeurDto employeurToDto(Employeur employeur);
     Employeur dtoToEmployeur(EmployeurDto dto);
 }
+

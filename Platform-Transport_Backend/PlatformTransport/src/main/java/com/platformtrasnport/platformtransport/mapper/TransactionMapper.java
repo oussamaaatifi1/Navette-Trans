@@ -14,7 +14,7 @@ public interface TransactionMapper {
     @Mapping(source = "reservation.id", target = "reservationId")
     TransactionDto transactionToDto(Transaction transaction);
 
-    @Mapping(target = "employe", ignore = true)
-    @Mapping(target = "reservation", ignore = true)
+    @Mapping(source = "employeId", target = "employe.id")
+    @Mapping(source = "reservationId", target = "reservation.id")
     Transaction dtoToTransaction(TransactionDto dto);
 }

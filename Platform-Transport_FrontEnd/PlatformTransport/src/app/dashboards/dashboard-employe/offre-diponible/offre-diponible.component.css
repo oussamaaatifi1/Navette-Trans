@@ -1,0 +1,25 @@
+body {
+    background-image: url('https://www.canvasprintsaustralia.net.au/wp-content/uploads/2018/10/travel-map-with-push-pins-edited.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+  }
+  .overlay {
+    background-color: rgba(128, 128, 128, 0.6); /* Grey overlay with opacity */
+    min-height: 100vh;
+  }
+  .container {
+    position: relative;
+    z-index: 1; /* Ensures content is above overlay */
+  }
+  /* Animation for card hover effect */
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }

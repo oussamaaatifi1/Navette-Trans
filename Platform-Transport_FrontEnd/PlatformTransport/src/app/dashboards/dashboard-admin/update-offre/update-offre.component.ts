@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OffreStatus } from 'src/app/core/models/enum/OffreStatus';
+import { Role } from 'src/app/core/models/enum/Role';
 import { OffreTransport } from 'src/app/core/models/OffreTransport';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { OffreTransportService } from 'src/app/core/services/offre-transport.service';
 
 @Component({
@@ -13,6 +15,7 @@ import { OffreTransportService } from 'src/app/core/services/offre-transport.ser
 export class UpdateOffreComponent implements OnInit {
   updateForm: FormGroup;
   offreTransportId!: number;
+  role: Role | null | undefined;
 
   // Initialize status options based on the OffreStatus enum
   statusOptions = Object.values(OffreStatus);
@@ -20,6 +23,7 @@ export class UpdateOffreComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private offreTransportService: OffreTransportService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -36,6 +40,7 @@ export class UpdateOffreComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.role = this.authService.getRole();
     this.route.paramMap.subscribe(params => {
       this.offreTransportId = +params.get('id')!;
       if (this.offreTransportId) {
@@ -70,7 +75,7 @@ export class UpdateOffreComponent implements OnInit {
   }
 
   approve(): void {
-    this.offreTransportService.approveOffreTransport(this.offreTransportId).subscribe(
+    this.offreTransportService.approveOffre(this.offreTransportId).subscribe(
       () => {
         this.updateForm.get('status')?.setValue(OffreStatus.APPROVED);
         this.router.navigate(['/offrebyadmin']);
@@ -82,7 +87,7 @@ export class UpdateOffreComponent implements OnInit {
   }
 
   reject(): void {
-    this.offreTransportService.rejectOffreTransport(this.offreTransportId).subscribe(
+    this.offreTransportService.approveOffre(this.offreTransportId).subscribe(
       () => {
         this.updateForm.get('status')?.setValue(OffreStatus.REJECTED);
         this.router.navigate(['/offrebyadmin']);
@@ -91,5 +96,8 @@ export class UpdateOffreComponent implements OnInit {
         console.error('Error rejecting offer:', error);
       }
     );
+  }
+  isAdmin(): boolean {
+    return this.role?.toString() === Role[Role.ADMIN];
   }
 }

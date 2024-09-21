@@ -1,78 +1,62 @@
 package com.platformtrasnport.platformtransport.controller;
 
-import com.platformtrasnport.platformtransport.model.Transaction;
-import com.platformtrasnport.platformtransport.model.Utilisateur;
-import com.platformtrasnport.platformtransport.repository.TransactionRepository;
-import com.platformtrasnport.platformtransport.repository.UtilisateurRepository;
+import com.platformtrasnport.platformtransport.dto.TransactionDto;
+import com.platformtrasnport.platformtransport.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/transactions")
+@RequestMapping("/api/transactions")
 @CrossOrigin(origins = "http://localhost:4200")
 public class TransactionController {
 
     @Autowired
-    private TransactionRepository transactionRepository;
-
-    @Autowired
-    private UtilisateurRepository utilisateurRepository;
+    private TransactionService transactionService;
 
     @PostMapping
-    public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
-        // Validate and set the user if needed
-        if (transaction.getEmploye() != null) {
-            Optional<Utilisateur> utilisateur = utilisateurRepository.findById(transaction.getEmploye().getId());
-            if (utilisateur.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
+    public ResponseEntity<TransactionDto> createTransaction(@RequestBody TransactionDto transactionDto) {
+        try {
+            TransactionDto createdTransaction = transactionService.createTransaction(transactionDto);
+            return new ResponseEntity<>(createdTransaction, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
-        Transaction savedTransaction = transactionRepository.save(transaction);
-        return new ResponseEntity<>(savedTransaction, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Transaction> getTransactionById(@PathVariable Long id) {
-        Optional<Transaction> transaction = transactionRepository.findById(id);
-        if (transaction.isPresent()) {
-            return new ResponseEntity<>(transaction.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<TransactionDto> getTransactionById(@PathVariable Long id) {
+        Optional<TransactionDto> transaction = transactionService.getTransactionById(id);
+        return transaction.map(t -> new ResponseEntity<>(t, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Transaction>> getAllTransactions() {
-        Iterable<Transaction> transactions = transactionRepository.findAll();
+    public ResponseEntity<List<TransactionDto>> getAllTransactions() {
+        List<TransactionDto> transactions = transactionService.getAllTransactions();
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Transaction> updateTransaction(@PathVariable Long id, @RequestBody Transaction updatedTransaction) {
-        Optional<Transaction> transaction = transactionRepository.findById(id);
-        if (transaction.isPresent()) {
-            Transaction existingTransaction = transaction.get();
-            existingTransaction.setMontant(updatedTransaction.getMontant());
-            existingTransaction.setDate(updatedTransaction.getDate());
-            existingTransaction.setEmploye(updatedTransaction.getEmploye());
-            Transaction savedTransaction = transactionRepository.save(existingTransaction);
-            return new ResponseEntity<>(savedTransaction, HttpStatus.OK);
-        } else {
+    public ResponseEntity<TransactionDto> updateTransaction(@PathVariable Long id, @RequestBody TransactionDto updatedTransactionDto) {
+        try {
+            TransactionDto updatedTransaction = transactionService.updateTransaction(id, updatedTransactionDto);
+            return new ResponseEntity<>(updatedTransaction, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTransaction(@PathVariable Long id) {
-        if (transactionRepository.existsById(id)) {
-            transactionRepository.deleteById(id);
+        try {
+            transactionService.deleteTransaction(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

@@ -3,54 +3,77 @@
 
 <main class="p-4 sm:ml-64 pt-20 bg-gray-50 text-gray-900 flex flex-col h-screen">
     <div class="flex-grow overflow-x-auto">
-        <table class="min-w-full border-collapse bg-white text-gray-900 shadow-md rounded-lg overflow-hidden">
-            <thead class="bg-gray-200 border-b border-gray-300">
-                <tr>
-                    <th class="p-3 text-left font-semibold text-gray-600">Image</th>
-                    <th class="p-3 text-left font-semibold text-gray-600">Offer Type</th>
-                    <th class="p-3 text-left font-semibold text-gray-600">From</th>
-                    <th class="p-3 text-left font-semibold text-gray-600">To</th>
-                    <th class="p-3 text-left font-semibold text-gray-600">Date</th>
-                    <th class="p-3 text-left font-semibold text-gray-600">Seats Available</th>
-                    <th class="p-3 text-left font-semibold text-gray-600">Price</th>
-                    <th class="p-3 text-left font-semibold text-gray-600">Status</th>
-                    <th class="p-3 text-left font-semibold text-gray-600">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let offre of offretransport"
-                    class="border-b border-gray-300 hover:bg-gray-50 transition-colors">
-                    <td class="p-3">
-                        <img [src]="offre.imgUrl" alt="Image for {{ offre.typeOffreTransport }}"
-                            class="w-16 h-16 rounded-lg shadow-sm" />
-                    </td>
-                    <td class="p-3 truncate">{{ offre.typeOffreTransport }}</td>
-                    <td class="p-3 truncate">{{ offre.pointDepart }}</td>
-                    <td class="p-3 truncate">{{ offre.destination }}</td>
-                    <td class="p-3">{{ offre.dateOffre | date:'shortDate' }}</td>
-                    <td class="p-3">{{ offre.nombrePlaces }}</td>
-                    <td class="p-3">{{ offre.prix | currency:'USD' }}</td>
-                    <td class="p-3">
-                        <span class="px-3 py-1 text-xs font-semibold rounded-full" [ngClass]="{
-                'bg-yellow-200 text-yellow-800': offre.status === 'PENDING',
-                'bg-green-200 text-green-800': offre.status === 'APPROVED',
-                'bg-red-200 text-red-800': offre.status === 'REJECTED'
-              }">
-                            {{ offre.status }}
-                        </span>
-                    </td>
-                    <td class="p-3 flex space-x-2">
-                        <button (click)="updateOffreTransport(offre.id ?? 0)"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 transition-colors">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button (click)="deleteOffreTransport(offre.id ?? 0)"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 transition-colors">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="px-6 py-4 bg-blue-600 text-white flex justify-between items-center">
+                    <h2 class="text-2xl font-bold">Transport Offers</h2>
+                    <button class="bg-white text-blue-600 px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition duration-150 ease-in-out">
+                        <i class="fas fa-plus mr-2"></i> Add Offer
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-blue-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Type</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Departure</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Destination</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Seats</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Price</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let offre of offretransport" class="bg-white border-b hover:bg-gray-50">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                        </svg>
+                                        {{ offre.typeOffreTransport }}
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        {{ offre.pointDepart }}
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">{{ offre.destination }}</td>
+                                <td class="py-4 px-6">{{ offre.dateOffre | date:'shortDate' }}</td>
+                                <td class="py-4 px-6">{{ offre.nombrePlaces }}</td>
+                                <td class="py-4 px-6">{{ offre.prix | currency:'USD' }}</td>
+                                <td class="py-4 px-6">
+                                    <span class="px-2 py-1 rounded-full text-xs font-medium" 
+                                          [ngClass]="{
+                                            'bg-yellow-100 text-yellow-800': offre.status === 'PENDING',
+                                            'bg-green-100 text-green-800': offre.status === 'APPROVED',
+                                            'bg-red-100 text-red-800': offre.status === 'REJECTED'
+                                          }">
+                                        {{ offre.status }}
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 flex space-x-2">
+                                    <button (click)="updateOffreTransport(offre.id ?? 0)" 
+                                            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+                                        Edit
+                                    </button>
+                                    <button (click)="deleteOffreTransport(offre.id ?? 0)" 
+                                            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </main>

@@ -1,23 +1,17 @@
 package com.platformtrasnport.platformtransport.service;
 
+import com.platformtrasnport.platformtransport.dto.ReservationDto;
 
-import com.platformtrasnport.platformtransport.model.Reservation;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface ReservationService {
+    ReservationDto reserve(ReservationDto reservationDto);
 
-    //    public Reservation ajoute(Long employeId, Long offreTransportId);
-    public Reservation reserve(Reservation reservation);
+    ReservationDto getReservation(Long id);
 
-    public Reservation getReservation(Long id);
+    ReservationDto updateReservation(Long id, ReservationDto reservationDto);
 
-    public Reservation updateReservation(Long id, Reservation reservation);
+    void deleteReservation(Long id);
 
-    public void deleteReservation(Long id);
-
-    public List<Reservation> getAllReservations();
+    List<ReservationDto> getAllReservations();
 }

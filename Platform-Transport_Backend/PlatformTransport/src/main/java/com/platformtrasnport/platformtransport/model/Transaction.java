@@ -1,29 +1,31 @@
-    package com.platformtrasnport.platformtransport.model;
+package com.platformtrasnport.platformtransport.model;
 
-    import jakarta.persistence.*;
-    import lombok.Getter;
-    import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-    import java.util.Date;
+import java.util.Date;
 
-    @Entity
-    @Getter
-    @Setter
-    public class Transaction {
+@Entity
+@Getter
+@Setter
+public class Transaction {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        private float montant;
+    private float montant;
 
-        @Temporal(TemporalType.DATE)
-        private Date date;
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
-        @ManyToOne
-        @JoinColumn(name = "utilisateur_id")
-        private Employe employe;
+    // Assuming that the foreign key refers to the employee who made the transaction.
+    @ManyToOne
+    @JoinColumn(name = "employe_id", nullable = false)  // Corrected FK name and made it non-nullable
+    private Employe employe;
 
-        @OneToOne(mappedBy = "transaction")
-        private Reservation reservation;
-    }
+    // Bidirectional mapping with Reservation
+    @OneToOne(mappedBy = "transaction")
+    private Reservation reservation;
+}

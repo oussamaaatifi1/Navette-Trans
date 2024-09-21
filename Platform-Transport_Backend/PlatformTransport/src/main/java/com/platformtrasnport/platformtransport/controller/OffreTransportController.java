@@ -1,10 +1,12 @@
 package com.platformtrasnport.platformtransport.controller;
 
 import com.platformtrasnport.platformtransport.dto.OffreTransportDto;
+import com.platformtrasnport.platformtransport.service.JwtService;
 import com.platformtrasnport.platformtransport.service.OffreTransportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,30 +21,43 @@ public class OffreTransportController {
     @Autowired
     private OffreTransportService offreTransportService;
 
-    @GetMapping("/all")
-    public List<OffreTransportDto> getAllOffreTransports() {
-        return offreTransportService.findPendingOffres();
-    }
-
-    @PostMapping("/add")
-    public OffreTransportDto createOffreTransport(@RequestBody OffreTransportDto offreTransportDto) {
-        return offreTransportService.createOffreTransport(offreTransportDto);
-    }
+    @Autowired
+    private JwtService jwtService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<OffreTransportDto> getOffreTransport(@PathVariable Long id) {
+    @PreAuthorize("hasAnyRole('EMPLOYEUR', 'ADMIN')")
+    public ResponseEntity<OffreTransportDto> getOffreTransportById(@PathVariable Long id) {
         OffreTransportDto offreTransportDto = offreTransportService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Offre Transport Not Found id " + id));
         return ResponseEntity.ok(offreTransportDto);
     }
 
+    @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('EMPLOYEUR', 'ADMIN')")
+    public ResponseEntity<List<OffreTransportDto>> getAllOffresTransports() {
+        List<OffreTransportDto> offres = offreTransportService.findAllOffres();
+        return ResponseEntity.ok(offres);
+    }
+
+    @PostMapping("/add")
+    @PreAuthorize("hasRole('EMPLOYEUR')")
+    public ResponseEntity<OffreTransportDto> createOffreTransport(
+            @RequestBody OffreTransportDto offreTransportDto,
+            @RequestHeader("Authorization") String token) {
+
+        OffreTransportDto createdOffre = offreTransportService.createOffreTransport(offreTransportDto, token);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdOffre);
+    }
+
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('EMPLOYEUR', 'ADMIN')")
     public ResponseEntity<OffreTransportDto> updateOffreTransport(@PathVariable Long id, @RequestBody OffreTransportDto offreTransportDto) {
         OffreTransportDto updatedOffreTransportDto = offreTransportService.updateOffreTransport(id, offreTransportDto);
         return ResponseEntity.ok(updatedOffreTransportDto);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('EMPLOYEUR')")
     public ResponseEntity<Map<String, Boolean>> deleteOffreTransport(@PathVariable Long id) {
         offreTransportService.deleteOffreTransport(id);
         Map<String, Boolean> response = new HashMap<>();
@@ -51,22 +66,40 @@ public class OffreTransportController {
     }
 
     @GetMapping("/approved")
-    public List<OffreTransportDto> getApprovedOffreTransports() {
-        return offreTransportService.findApprovedOffres();
+    @PreAuthorize("hasAnyRole('EMPLOYEUR', 'EMPLOYE')")
+    public ResponseEntity<List<OffreTransportDto>> getApprovedOffreTransports() {
+        List<OffreTransportDto> approvedOffres = offreTransportService.findApprovedOffres();
+        return ResponseEntity.ok(approvedOffres);
+    }
+
+    @GetMapping("/offreByEmployeur")
+    @PreAuthorize("hasRole('EMPLOYEUR')")
+    public ResponseEntity<List<OffreTransportDto>> getOffreTransportByEmployeur(@RequestHeader("Authorization") String token) {
+        if (!token.startsWith("Bearer ")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid token format");
+        }
+        String jwtToken = token.substring(7);
+        Long userId = jwtService.extractUserId(jwtToken);
+        List<OffreTransportDto> offres = offreTransportService.findOffreTransportByEmployeurId(userId);
+        return ResponseEntity.ok(offres);
     }
 
     @GetMapping("/rejected")
-    public List<OffreTransportDto> getRejectedOffreTransports() {
-        return offreTransportService.findRejectedOffres();
+    @PreAuthorize("hasAnyRole('EMPLOYEUR', 'EMPLOYE')")
+    public ResponseEntity<List<OffreTransportDto>> getRejectedOffreTransports() {
+        List<OffreTransportDto> rejectedOffres = offreTransportService.findRejectedOffres();
+        return ResponseEntity.ok(rejectedOffres);
     }
 
     @PutMapping("/{id}/approve")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<OffreTransportDto> approveOffre(@PathVariable Long id) {
         OffreTransportDto approvedOffreTransportDto = offreTransportService.approveOffre(id);
         return ResponseEntity.ok(approvedOffreTransportDto);
     }
 
     @PutMapping("/{id}/reject")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<OffreTransportDto> rejectOffre(@PathVariable Long id) {
         OffreTransportDto rejectedOffreTransportDto = offreTransportService.rejectOffre(id);
         return ResponseEntity.ok(rejectedOffreTransportDto);

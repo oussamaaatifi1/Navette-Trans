@@ -29,7 +29,7 @@ export class EmployeursComponent implements OnInit {
       this.employeurService.updateEmployeur(id, this.selectedEmployeur).subscribe(
         (response) => {
           console.log('Employeur updated successfully:', response);
-          this.getAllEmployeurs(); // Refresh the list
+          this.getAllEmployeurs();
         },
         (error) => {
           console.error('Error updating employeur:', error);
@@ -42,7 +42,7 @@ export class EmployeursComponent implements OnInit {
     this.employeurService.deleteEmployeur(id).subscribe(
       () => {
         console.log('Employeur deleted successfully');
-        this.getAllEmployeurs(); // Refresh the list
+        this.getAllEmployeurs();
       },
       (error) => {
         console.error('Error deleting employeur:', error);
@@ -51,6 +51,6 @@ export class EmployeursComponent implements OnInit {
   }
 
   selectEmployeur(employeur: Employeur): void {
-    this.selectedEmployeur = { ...employeur }; // Create a copy of the selected employeur for editing
+    this.selectedEmployeur = { ...employeur };
   }
 }

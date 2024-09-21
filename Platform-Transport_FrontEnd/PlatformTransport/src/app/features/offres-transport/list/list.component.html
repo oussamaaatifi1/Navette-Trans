@@ -1,94 +1,105 @@
-<!-- <app-navbar></app-navbar>
-<app-sidebar></app-sidebar> -->
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
 
-<!-- <main class="p-4 sm:ml-64 pt-20"> -->
-
-    <header>
-        <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-            <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                <a href="#" class="flex items-center">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Your Logo</span>
-                </a>
-                <div class="flex items-center lg:order-2">
-                    <a href="#" class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Log in</a>
-                    <a href="#" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Get started</a>
-                    <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                        <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+<main class="p-4 sm:ml-64 pt-20 bg-gray-50 text-gray-900 flex flex-col h-screen">
+    <div class="flex-grow overflow-x-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div class="px-6 py-4 bg-blue-600 text-white flex justify-between items-center">
+                    <h2 class="text-2xl font-bold">Transport Offers</h2>
+                    <button (click)="openCreateDialog()"
+                        class="bg-white text-blue-600 px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 transition duration-150 ease-in-out">
+                        <i class="fas fa-plus mr-2"></i> Add Offer
                     </button>
                 </div>
-                <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
-                    <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-                        <li>
-                            <a href="#" class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Home</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Company</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Marketplace</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Team</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <section class="py-10">
-        <!-- Search Bar -->
-        <div class="max-w-screen-xl mx-auto mb-6">
-            <input
-                type="text"
-                [(ngModel)]="searchTerm"
-                (input)="filterOffers()"
-                placeholder="Search..."
-                class="block w-full p-2 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-        </div>
 
-        <!-- Offers Grid -->
-        <div class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div *ngFor="let offre of filteredOffres" class="card bg-white rounded-lg shadow-lg overflow-hidden relative">
-                <img [src]="offre.imgUrl" alt="Transport Image" class="w-full h-56 object-cover">
-                <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-between p-4">
-                    <div class="text-white text-xl font-bold flex items-center justify-between mb-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-car-side mr-2"></i>
-                            <span>{{ offre.pointDepart }}</span>
-                        </div>
-                        <span class="mx-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                        <div class="flex items-center">
-                            <i class="fas fa-car-side mr-2"></i>
-                            <span>{{ offre.destination }}</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between text-white">
-                        <p class="font-light text-sm">{{ offre.dateOffre | date:'shortDate' }}</p>
-                        <div class="flex items-center space-x-4">
-                            <span class="text-lg font-bold">{{ offre.prix }} MAD</span>
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">
-                                Reserve
-                            </button>
-                        </div>
-                    </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-blue-50">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">
+                                    ID</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">
+                                    Type</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">
+                                    Departure</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">
+                                    Destination</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">
+                                    Date</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">
+                                    Seats</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">
+                                    Price</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">
+                                    Status</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">
+                                    Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let offre of offreTransport" class="bg-white border-b hover:bg-gray-50">
+                                <td class="py-4 px-6">{{ offre.id }}</td>
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                        </svg>
+                                        {{ offre.typeOffreTransport }}
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                            </path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        {{ offre.pointDepart }}
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">{{ offre.destination }}</td>
+                                <td class="py-4 px-6">{{ offre.dateOffre | date:'shortDate' }}</td>
+                                <td class="py-4 px-6">{{ offre.nombrePlaces }}</td>
+                                <td class="py-4 px-6">{{ offre.prix | currency:'USD' }}</td>
+                                <td class="py-4 px-6">
+                                    <span class="px-2 py-1 rounded-full text-xs font-medium" [ngClass]="{
+                                            'bg-yellow-100 text-yellow-800': offre.status === 'PENDING',
+                                            'bg-green-100 text-green-800': offre.status === 'APPROVED',
+                                            'bg-red-100 text-red-800': offre.status === 'REJECTED'
+                                          }">
+                                        {{ offre.status }}
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 flex space-x-2">
+                                    <button (click)="updateOffreTransport(offre.id ?? 0)"
+                                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+                                        Edit
+                                    </button>
+                                    <button (click)="deleteOffreTransport(offre.id ?? 0)"
+                                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        
-    </section>
-    
-<!-- </main> -->
+    </div>
+</main>

@@ -9,12 +9,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EmployeurService {
 
-  private BaseUrl = "http://localhost:8088/api/employeur";
+  private BaseUrl = "http://localhost:8088/api/employeurs";
 
   constructor(private httpclient : HttpClient) { }
 
   getAllEmployeur() : Observable<Employeur[]> {
-    return this.httpclient.get<Employeur[]>(`${this.BaseUrl}/all`);
+    return this.httpclient.get<Employeur[]>(`${this.BaseUrl}`);
   }
   updateEmployeur(id: number, employeur: Employeur): Observable<Employeur> {
     return this.httpclient.put<Employeur>(`${this.BaseUrl}/${id}`, employeur);

@@ -17,11 +17,16 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private  final JwtService jwtService;
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+
+    private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
     @Override
@@ -30,21 +35,28 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain)
             throws ServletException, IOException {
-        final String authHadeader = request.getHeader("Authorization");
+
+        final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
-        if (authHadeader == null || !authHadeader.startsWith("Bearer ") ){
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            logger.warn("No Bearer token found in Authorization header");
             filterChain.doFilter(request, response);
             return;
         }
-        jwt= authHadeader.substring(7);
+
+        jwt = authHeader.substring(7);
         userEmail = jwtService.extractUserEmail(jwt);
 
-        // valider token
-        if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
+        logger.info("Extracted userEmail: {}", userEmail);
+
+        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 
-            if (jwtService.isTokenValid(jwt, userDetails)){
+            if (userDetails == null) {
+                logger.error("No user found with email: {}", userEmail);
+            } else if (jwtService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
@@ -54,10 +66,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+                logger.info("Authentication set in SecurityContext for user: {}", userEmail);
+            } else {
+                logger.warn("Invalid JWT token for user: {}", userEmail);
             }
         }
 
         filterChain.doFilter(request, response);
-
     }
 }

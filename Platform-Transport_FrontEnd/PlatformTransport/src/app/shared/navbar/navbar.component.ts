@@ -10,26 +10,39 @@ import { Role } from 'src/app/core/models/enum/Role';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit{
-
+export class NavbarComponent implements OnInit {
   role: Role | null | undefined;
-  
+  nom: any;
+  email: any;
+  prenom: any;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    // private userService: UtilisateurService
-    private reservationService: ReservationService,
+    // private reservationService: ReservationService,
     private employeeService: EmployeServiceService
   ) {}
 
+  ngOnInit(): void {
+    this.getAllEmployes();
+    this.role = this.authService.getRole();
+    // this.nom = this.authService.getNom();
+    this.email = this.authService.getEmail();
+    
+  }
+
+  // getNom(): void {
+  //   this.authService.getNom()
+  // }
+
+  
   isDropdownOpen = false;
-  employee: Employe[] = [];
+  utilisateur: Utilisateur[] = [];
 
   // loadNewEmployees(): void {
-  //   this.loadNewEmployees(); 
+  //   this.loadNewEmployees();
   //   this.employeeService.getAllEmployes().subscribe((employees) => {
   //     this.employee = employees;
   //   });
@@ -39,7 +52,6 @@ export class NavbarComponent implements OnInit{
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
@@ -47,17 +59,10 @@ export class NavbarComponent implements OnInit{
 
   reservations: Reservation[] = [];
 
-
-  ngOnInit(): void {
-    // this.loadReservations();
-    this.getAllEmployes();
-    this.role = this.authService.getRole();
-  }
-
-  getAllEmployes() : void {
-    this.employeeService.getAllEmployes().subscribe(data =>{
-      this.employee = data;
-    })
+  getAllEmployes(): void {
+    this.employeeService.getAllEmployes().subscribe((data) => {
+      this.utilisateur = data;
+    });
   }
 
   isAdmin(): boolean {

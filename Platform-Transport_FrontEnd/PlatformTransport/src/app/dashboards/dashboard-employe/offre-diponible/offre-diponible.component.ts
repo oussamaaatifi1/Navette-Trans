@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { OffreTransport } from 'src/app/core/models/OffreTransport';
 import { OffreTransportService } from 'src/app/core/services/offre-transport.service';
 
@@ -10,39 +9,37 @@ import { OffreTransportService } from 'src/app/core/services/offre-transport.ser
 })
 export class OffreDiponibleComponent implements OnInit {
 
-  offretransport! : OffreTransport[];
+  offretransport: OffreTransport[] = [];
+  searchTerm: string = '';
+  selectedFilter: string = 'all';
 
-  constructor(private router : Router, private offreService : OffreTransportService){}
+  constructor(private offreService: OffreTransportService) {}
+
   ngOnInit(): void {
-    this.loadOffresTransports(); 
+    this.loadApprovedOffreTransports(); 
   }
 
-  approveOffre(offer: OffreTransport): void {
-    if (offer.id !== undefined) {
-      this.offreService.approveOffreTransport(offer.id).subscribe(
-        (updatedOffer: OffreTransport) => {
-          console.log('Offer approved:', updatedOffer);
-          this.loadOffresTransports(); 
-        },
-        (error) => {
-          console.error('Error approving offer:', error);
-        }
-      );
-    } else {
-      console.error('Offer ID is undefined');
-    }
-  }
-  
-
-  loadOffresTransports(): void {
-    this.offreService.getOffresTransports().subscribe(
+  loadApprovedOffreTransports(): void {
+    this.offreService.getApprovedOffreTransports().subscribe(
       (data: OffreTransport[]) => {
         this.offretransport = data;
       },
       (error) => {
-        console.error('Error loading offers:', error);
+        console.error('Error loading approved offers:', error);
       }
     );
   }
 
+  get filteredOffers(): OffreTransport[] {
+    return this.offretransport.filter(offer => {
+      const matchesSearchTerm = offer.pointDepart.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+                                offer.destination.toLowerCase().includes(this.searchTerm.toLowerCase());
+      const matchesFilter = this.selectedFilter === 'all' || offer.typeOffreTransport === this.selectedFilter;
+      return matchesSearchTerm && matchesFilter;
+    });
+  }
+
+  reserve(offer: OffreTransport): void {
+    console.log('Reserving offer:', offer);
+  }
 }

@@ -23,7 +23,7 @@ export class ManagemntOffreComponent implements OnInit {
   }
 
   getOffresTransports(): void {
-    this.offretransportService.getOffresTransports().subscribe(
+    this.offretransportService.getAllOffresTransports().subscribe(
       data => {
         this.offretransport = data;
       },
@@ -46,7 +46,7 @@ export class ManagemntOffreComponent implements OnInit {
       this.offretransportService.deleteOffreTransport(id).subscribe(
         () => this.getOffresTransports(),
         error => console.error('Error deleting offer:', error)
-      );
+      );  
     }
   }
 }

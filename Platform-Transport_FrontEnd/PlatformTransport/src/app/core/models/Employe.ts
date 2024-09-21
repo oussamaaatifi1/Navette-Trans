@@ -5,4 +5,5 @@ export interface Employe {
     email: string;
     password: string;
     role: string;
+    imgUrl : string;
 }

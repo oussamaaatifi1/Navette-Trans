@@ -50,6 +50,9 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
+        if (userDetails == null) {
+            return false; // Ensure userDetails is not null
+        }
         final String email = extractUserEmail(token);
         return (email.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
@@ -82,7 +85,7 @@ public class JwtService {
                 .collect(Collectors.joining(","));
     }
 
-    public Long extractUserId(String token) { // Method to extract userId from token
+    public Long extractUserId(String token) {
         Claims claims = extractAllClaims(token);
         return claims.get("userId", Long.class);
     }

@@ -18,8 +18,6 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { DashboardAdminComponent } from './dashboards/dashboard-admin/dashboard-admin.component';
 import { DashboardEmployeComponent } from './dashboards/dashboard-employe/dashboard-employe.component';
-import { DashboardEmployeurComponent } from './dashboards/dashboard-employeur/dashboard-employeur.component';
-import { DashboardParticulierComponent } from './dashboards/dashboard-particulier/dashboard-particulier.component';
 import { AdminCountComponent } from './dashboards/dashboard-admin/admin-count/admin-count.component';
 import { HistoriqueComponent } from './features/reservation/historique/historique.component';
 import { EmployeComponent } from './features/employes/employe/employe.component';
@@ -32,6 +30,12 @@ import { AuthenticationInterceptor } from './core/interceptors/authentication.in
 import { EmployesComponent } from './dashboards/dashboard-admin/employes/employes.component';
 import { EmployeursComponent } from './dashboards/dashboard-admin/employeur/employeur.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { DashboardEmployeurComponent } from './dashboards/dashboard-employeur/dashboard-employeur.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { EditEmployesComponent } from './dashboards/dashboard-admin/employes/edit-employes/edit-employes.component';
+import { SearchComponent } from './pages/search/search.component';
 
 
 @NgModule({
@@ -50,8 +54,6 @@ import { HomePageComponent } from './home-page/home-page.component';
     HeaderComponent,
     DashboardAdminComponent,
     DashboardEmployeComponent,
-    DashboardEmployeurComponent,
-    DashboardParticulierComponent,
     AdminCountComponent,
     HistoriqueComponent,
     EmployeComponent,
@@ -63,6 +65,9 @@ import { HomePageComponent } from './home-page/home-page.component';
     EmployesComponent,
     EmployeursComponent,
     HomePageComponent,
+    DashboardEmployeurComponent,
+    EditEmployesComponent,
+    SearchComponent,
     
   ],
   imports: [
@@ -71,8 +76,12 @@ import { HomePageComponent } from './home-page/home-page.component';
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule
   ],
+  
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

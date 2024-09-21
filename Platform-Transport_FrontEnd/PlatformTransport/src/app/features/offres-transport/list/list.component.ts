@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { OffreTransport } from 'src/app/core/models/OffreTransport';
 import { OffreTransportService } from 'src/app/core/services/offre-transport.service';
+import { AuthService } from 'src/app/core/services/auth.service'; // Import your auth service
+import { CreateComponent } from '../create/create.component';
 
 @Component({
   selector: 'app-list',
@@ -11,30 +14,62 @@ import { OffreTransportService } from 'src/app/core/services/offre-transport.ser
 export class ListOffreComponent implements OnInit {
 
   offreTransport: OffreTransport[] = [];
-  filteredOffres: OffreTransport[] = [];
-  searchTerm: string = '';
 
-  constructor(private offreTransportService: OffreTransportService, private router: Router) {}
+  constructor(
+    private offreTransportService: OffreTransportService,
+    private authService: AuthService, // Inject the auth service
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.getApprovedOffreTransports();
+    this.getOffresTransports();
   }
 
-  getApprovedOffreTransports(): void {
-    this.offreTransportService.getApprovedOffreTransports().subscribe(data => {
-      this.offreTransport = data;
-      this.filteredOffres = data;
+  getOffresTransports(): void {
+    const token = this.authService.getToken();
+  
+    if (token) {
+      this.offreTransportService.getOffreTransportByEmployeur(token).subscribe(
+        data => {
+          this.offreTransport = data;
+        },
+        error => {
+          console.error('Error fetching offers:', error);
+        }
+      );
+    } else {
+      console.error('Token is null or invalid');
+      // You can redirect to login page or show an error message
+    }
+  }
+
+  updateOffreTransport(id?: number): void {
+    if (id !== undefined) {
+      this.router.navigate(['/update', id]);
+    } else {
+      console.error('Offer ID is undefined');
+    }
+  }
+
+  openCreateDialog(): void {
+    const dialogRef = this.dialog.open(CreateComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe((createdOffer: OffreTransport) => {
+      if (createdOffer) {
+        this.offreTransport.push(createdOffer);
+      }
     });
   }
 
-  filterOffers(): void {
-    if (this.searchTerm) {
-      this.filteredOffres = this.offreTransport.filter(offre =>
-        offre.pointDepart.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        offre.destination.toLowerCase().includes(this.searchTerm.toLowerCase())
+  deleteOffreTransport(id: number): void {
+    if (confirm('Are you sure you want to delete this offer?')) {
+      this.offreTransportService.deleteOffreTransport(id).subscribe(
+        () => this.getOffresTransports(),
+        error => console.error('Error deleting offer:', error)
       );
-    } else {
-      this.filteredOffres = this.offreTransport;
     }
   }
 }

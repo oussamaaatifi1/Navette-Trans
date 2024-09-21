@@ -32,6 +32,16 @@ export class AuthService {
     );
   }
 
+  getEmail(): string | null {
+    if (!this.email) {
+      const token = this.getToken();
+      if (token) {
+        this.email = this.decodeToken(token).sub;
+      }
+    }
+    return this.email;
+  }
+
   registerParticulier(request: RegisterRequest): Observable<any> {
     return this.http.post<{ token: string }>(`${this.apiUrl}/register/registerParticulier`, request).pipe(
       tap(response => {
