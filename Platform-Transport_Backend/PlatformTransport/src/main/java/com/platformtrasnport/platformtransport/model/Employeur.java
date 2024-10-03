@@ -13,6 +13,7 @@ import java.util.List;
 @DiscriminatorValue("Employeur")
 public class Employeur extends Utilisateur {
 
+    @Transient
     @OneToMany(mappedBy = "employeur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OffreTransport> offre;
 
