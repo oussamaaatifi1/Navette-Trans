@@ -12,8 +12,11 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class EmployeurController {
 
-    @Autowired
-    private EmployeurServiceImpl employeurService;
+    private final EmployeurServiceImpl employeurService;
+
+    public EmployeurController(EmployeurServiceImpl employeurService) {
+        this.employeurService = employeurService;
+    }
 
     @GetMapping
     public List<EmployeurDto> getAllEmployeurs() {

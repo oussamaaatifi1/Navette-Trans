@@ -1,7 +1,5 @@
 package com.platformtrasnport.platformtransport.repository;
 
-import com.platformtrasnport.platformtransport.dto.EmployeurDto;
-import com.platformtrasnport.platformtransport.dto.OffreTransportDto;
 import com.platformtrasnport.platformtransport.model.OffreTransport;
 import com.platformtrasnport.platformtransport.model.Reservation;
 import com.platformtrasnport.platformtransport.model.enul.OffreStatus;

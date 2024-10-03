@@ -15,8 +15,11 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 public class TransactionController {
 
-    @Autowired
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
+
+    public TransactionController(TransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
 
     @PostMapping
     public ResponseEntity<TransactionDto> createTransaction(@RequestBody TransactionDto transactionDto) {

@@ -1,14 +1,12 @@
     package com.platformtrasnport.platformtransport.model;
 
     import com.platformtrasnport.platformtransport.model.enul.OffreStatus;
-    import com.platformtrasnport.platformtransport.model.enul.RejectionReason;
     import com.platformtrasnport.platformtransport.model.enul.TypeOffreTransport;
     import jakarta.persistence.*;
     import lombok.Getter;
     import lombok.Setter;
 
     import java.time.LocalDate;
-    import java.util.Date;
 
     @Entity
     @Getter

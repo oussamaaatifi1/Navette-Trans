@@ -16,7 +16,6 @@ public class EmployeController {
 
     private final EmployeServiceImpl employeService;
 
-    // Constructor-based dependency injection
     public EmployeController(EmployeServiceImpl employeService) {
         this.employeService = employeService;
     }
