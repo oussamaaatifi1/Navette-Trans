@@ -28,7 +28,7 @@ public class Utilisateur implements UserDetails {
     @Column(unique = true)
     private String email;
     private String password;
-    private String ImgUrl;
+    private String imgUrl; // Renamed field
 
     @Enumerated(EnumType.STRING)
     private Role role;

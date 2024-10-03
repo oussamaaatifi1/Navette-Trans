@@ -29,7 +29,6 @@
         private float prix;
         private String imgUrl;
         private OffreStatus status;
-//      private RejectionReason rejectionReason;
 
         @ManyToOne
         @JoinColumn(name = "employeur_id")
