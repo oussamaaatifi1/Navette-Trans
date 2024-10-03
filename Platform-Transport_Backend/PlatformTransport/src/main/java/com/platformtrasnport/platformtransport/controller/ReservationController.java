@@ -1,7 +1,7 @@
 package com.platformtrasnport.platformtransport.controller;
 
 import com.platformtrasnport.platformtransport.dto.ReservationDto;
-import com.platformtrasnport.platformtransport.service.Impl.ReservationServiceImpl;
+import com.platformtrasnport.platformtransport.service.impl.ReservationServiceImpl;
 import com.platformtrasnport.platformtransport.service.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

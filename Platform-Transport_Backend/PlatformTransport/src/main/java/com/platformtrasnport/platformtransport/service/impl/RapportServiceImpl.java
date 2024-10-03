@@ -1,4 +1,4 @@
-package com.platformtrasnport.platformtransport.service.Impl;
+package com.platformtrasnport.platformtransport.service.impl; // Updated package name
 
 import com.platformtrasnport.platformtransport.dto.RapportDto;
 import com.platformtrasnport.platformtransport.mapper.RapportMapper;

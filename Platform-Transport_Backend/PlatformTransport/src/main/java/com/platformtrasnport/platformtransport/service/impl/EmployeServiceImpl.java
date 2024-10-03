@@ -1,4 +1,4 @@
-package com.platformtrasnport.platformtransport.service.Impl;
+package com.platformtrasnport.platformtransport.service.impl;
 
 import com.platformtrasnport.platformtransport.dto.EmployeDto;
 import com.platformtrasnport.platformtransport.mapper.EmployeMapper;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeServiceImpl implements EmployeService {

@@ -2,7 +2,7 @@ package com.platformtrasnport.platformtransport.TestUnitaireByMokito;
 
 import com.platformtrasnport.platformtransport.model.Administrateur;
 import com.platformtrasnport.platformtransport.repository.AdministrateurRepository;
-import com.platformtrasnport.platformtransport.service.Impl.AdministrateurServiceImpl;
+import com.platformtrasnport.platformtransport.service.impl.AdministrateurServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

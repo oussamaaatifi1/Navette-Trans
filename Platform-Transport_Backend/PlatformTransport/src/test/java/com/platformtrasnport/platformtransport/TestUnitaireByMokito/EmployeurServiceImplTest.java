@@ -4,7 +4,7 @@ import com.platformtrasnport.platformtransport.dto.EmployeurDto;
 import com.platformtrasnport.platformtransport.mapper.EmployeurMapper;
 import com.platformtrasnport.platformtransport.model.Employeur;
 import com.platformtrasnport.platformtransport.repository.EmployeurRepository;
-import com.platformtrasnport.platformtransport.service.Impl.EmployeurServiceImpl;
+import com.platformtrasnport.platformtransport.service.impl.EmployeurServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

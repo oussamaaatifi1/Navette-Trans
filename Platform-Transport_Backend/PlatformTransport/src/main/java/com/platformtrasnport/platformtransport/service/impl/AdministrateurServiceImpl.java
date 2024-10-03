@@ -1,4 +1,4 @@
-package com.platformtrasnport.platformtransport.service.Impl;
+package com.platformtrasnport.platformtransport.service.impl;
 
 import com.platformtrasnport.platformtransport.model.Administrateur;
 import com.platformtrasnport.platformtransport.repository.AdministrateurRepository;

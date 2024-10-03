@@ -4,7 +4,7 @@ import com.platformtrasnport.platformtransport.dto.RapportDto;
 import com.platformtrasnport.platformtransport.mapper.RapportMapper;
 import com.platformtrasnport.platformtransport.model.Rapport;
 import com.platformtrasnport.platformtransport.repository.RapportRepository;
-import com.platformtrasnport.platformtransport.service.Impl.RapportServiceImpl;
+import com.platformtrasnport.platformtransport.service.impl.RapportServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

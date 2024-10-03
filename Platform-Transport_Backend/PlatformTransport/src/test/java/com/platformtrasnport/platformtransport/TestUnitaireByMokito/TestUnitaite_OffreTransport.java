@@ -7,7 +7,7 @@ import com.platformtrasnport.platformtransport.model.OffreTransport;
 import com.platformtrasnport.platformtransport.model.enul.OffreStatus;
 import com.platformtrasnport.platformtransport.repository.EmployeurRepository;
 import com.platformtrasnport.platformtransport.repository.OffreTransportRepository;
-import com.platformtrasnport.platformtransport.service.Impl.OffreTransportServiceImpl;
+import com.platformtrasnport.platformtransport.service.impl.OffreTransportServiceImpl;
 import com.platformtrasnport.platformtransport.service.JwtService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
