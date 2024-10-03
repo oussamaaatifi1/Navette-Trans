@@ -41,7 +41,6 @@
             admin.setNom(request.getNom());
             admin.setPrenom(request.getPrenom());
             admin.setEmail(request.getEmail());
-            admin.setImgUrl(request.getImgUrl());
             admin.setPassword(passwordEncoder.encode(request.getPassword()));
             admin.setRole(Role.ADMIN);
             userdao.save(admin);

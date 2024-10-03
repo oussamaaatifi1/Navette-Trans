@@ -1,10 +1,8 @@
 package com.platformtrasnport.platformtransport.service;
 
 import com.platformtrasnport.platformtransport.dto.ReservationDto;
-import com.platformtrasnport.platformtransport.model.Employe;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ReservationService {
 //    ReservationDto reserve(ReservationDto reservationDto);
