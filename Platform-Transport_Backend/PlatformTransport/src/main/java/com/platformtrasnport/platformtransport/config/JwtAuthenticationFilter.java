@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+    private static final Logger jwtAuthLogger = LoggerFactory.getLogger(JwtAuthenticationFilter.class); // Renamed logger
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
@@ -41,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String userEmail;
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            logger.warn("No Bearer token found in Authorization header");
+            jwtAuthLogger.warn("No Bearer token found in Authorization header"); // Updated reference
             filterChain.doFilter(request, response);
             return;
         }
@@ -49,13 +49,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractUserEmail(jwt);
 
-        logger.info("Extracted userEmail: {}", userEmail);
+        jwtAuthLogger.info("Extracted userEmail: {}", userEmail); // Updated reference
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 
             if (userDetails == null) {
-                logger.error("No user found with email: {}", userEmail);
+                jwtAuthLogger.error("No user found with email: {}", userEmail); // Updated reference
             } else if (jwtService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
@@ -66,9 +66,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-                logger.info("Authentication set in SecurityContext for user: {}", userEmail);
+                jwtAuthLogger.info("Authentication set in SecurityContext for user: {}", userEmail); // Updated reference
             } else {
-                logger.warn("Invalid JWT token for user: {}", userEmail);
+                jwtAuthLogger.warn("Invalid JWT token for user: {}", userEmail); // Updated reference
             }
         }
 

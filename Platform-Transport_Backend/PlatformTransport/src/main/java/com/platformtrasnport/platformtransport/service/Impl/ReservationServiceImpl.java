@@ -6,7 +6,6 @@ import com.platformtrasnport.platformtransport.model.*;
 import com.platformtrasnport.platformtransport.repository.*;
 import com.platformtrasnport.platformtransport.service.JwtService;
 import com.platformtrasnport.platformtransport.service.ReservationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,21 +14,20 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
+    private static final String RESERVATION_NOT_FOUND_MESSAGE = "Reservation not found";
+    private static final String EMPLOYE_NOT_FOUND_MESSAGE = "Employe not found";
+    private static final String OFFRE_TRANSPORT_NOT_FOUND_MESSAGE = "OffreTransport not found";
+    private static final String NOT_ENOUGH_AVAILABLE_SEATS_MESSAGE = "Not enough available seats";
+
     private final ReservationRepository reservationRepository;
-
     private final EmployeRepository employeRepository;
-
     private final OffreTransportRepository offreTransportRepository;
-
     private final TransactionRepository transactionRepository;
-
     private final ReservationMapper reservationMapper;
-
     private final JwtService jwtService;
 
     public ReservationServiceImpl(ReservationRepository reservationRepository, EmployeRepository employeRepository, OffreTransportRepository offreTransportRepository, TransactionRepository transactionRepository, ReservationMapper reservationMapper, JwtService jwtService) {
@@ -47,15 +45,15 @@ public class ReservationServiceImpl implements ReservationService {
         // Extract employee ID from token
         Long employeId = jwtService.extractUserId(token.substring(7));
         Employe employe = employeRepository.findById(employeId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employe not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, EMPLOYE_NOT_FOUND_MESSAGE));
 
         // Get the transport offer
         OffreTransport offre = offreTransportRepository.findById(reservationDto.getOffreId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "OffreTransport not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, OFFRE_TRANSPORT_NOT_FOUND_MESSAGE));
 
         // Check available seats
         if (offre.getNombrePlaces() < reservationDto.getNombrePlaces()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not enough available seats");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, NOT_ENOUGH_AVAILABLE_SEATS_MESSAGE);
         }
 
         // Calculate total price
@@ -105,21 +103,18 @@ public class ReservationServiceImpl implements ReservationService {
         return savedReservationDto;
     }
 
-
-
-
     @Override
     public List<ReservationDto> findReservationsByEmployeId(Long employeId) {
         List<Reservation> reservations = reservationRepository.findReservationsByEmployeId(employeId);
         return reservations.stream()
                 .map(reservationMapper::reservationToDto)
-                .collect(Collectors.toList());
+                .toList(); // Changed from collect(Collectors.toList()) to toList()
     }
 
     @Override
     public ReservationDto getReservation(Long id) {
         Reservation reservation = reservationRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, RESERVATION_NOT_FOUND_MESSAGE));
         return reservationMapper.reservationToDto(reservation);
     }
 
@@ -128,27 +123,27 @@ public class ReservationServiceImpl implements ReservationService {
         List<Reservation> reservations = reservationRepository.findAll();
         return reservations.stream()
                 .map(reservationMapper::reservationToDto)
-                .collect(Collectors.toList());
+                .toList(); // Changed from collect(Collectors.toList()) to toList()
     }
 
     @Override
     @Transactional
     public ReservationDto updateReservation(Long id, ReservationDto reservationDto) {
         Reservation existingReservation = reservationRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, RESERVATION_NOT_FOUND_MESSAGE));
 
         // Update fields
         existingReservation.setDateReservation(reservationDto.getDateReservation());
 
         if (reservationDto.getEmployeId() != null) {
             Employe employe = employeRepository.findById(reservationDto.getEmployeId())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employe not found"));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, EMPLOYE_NOT_FOUND_MESSAGE));
             existingReservation.setEmploye(employe);
         }
 
         if (reservationDto.getOffreId() != null) {
             OffreTransport offre = offreTransportRepository.findById(reservationDto.getOffreId())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "OffreTransport not found"));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, OFFRE_TRANSPORT_NOT_FOUND_MESSAGE));
             existingReservation.setOffre(offre);
         }
 
@@ -168,7 +163,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Transactional
     public void deleteReservation(Long id) {
         Reservation reservation = reservationRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, RESERVATION_NOT_FOUND_MESSAGE));
 
         // Restore the seat in OffreTransport
         OffreTransport offre = reservation.getOffre();
@@ -192,5 +187,4 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Object[]> getMontantSumByEmploye() {
         return reservationRepository.sumMontantByEmploye();
     }
-
 }

@@ -6,11 +6,10 @@ import com.platformtrasnport.platformtransport.model.Employeur;
 import com.platformtrasnport.platformtransport.model.OffreTransport;
 import com.platformtrasnport.platformtransport.model.enul.OffreStatus;
 import com.platformtrasnport.platformtransport.repository.OffreTransportRepository;
-import com.platformtrasnport.platformtransport.repository.EmployeurRepository; // Ensure you import the correct repository
+import com.platformtrasnport.platformtransport.repository.EmployeurRepository;
 import com.platformtrasnport.platformtransport.service.JwtService;
 import com.platformtrasnport.platformtransport.service.OffreTransportService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class OffreTransportServiceImpl implements OffreTransportService {
@@ -57,12 +55,11 @@ public class OffreTransportServiceImpl implements OffreTransportService {
         return offreTransportMapper.offreTransportToDto(savedOffre);
     }
 
-
     @Override
     public List<OffreTransportDto> findPendingOffres() {
         return offreTransportRepository.findByStatus(OffreStatus.PENDING).stream()
                 .map(offreTransportMapper::offreTransportToDto)
-                .collect(Collectors.toList());
+                .toList(); // Changed to Stream.toList()
     }
 
     @Override
@@ -75,14 +72,14 @@ public class OffreTransportServiceImpl implements OffreTransportService {
     public List<OffreTransportDto> findAllOffres() {
         return offreTransportRepository.findAll().stream()
                 .map(offreTransportMapper::offreTransportToDto)
-                .collect(Collectors.toList());
+                .toList(); // Changed to Stream.toList()
     }
 
     @Override
     public List<OffreTransportDto> findApprovedOffres() {
         return offreTransportRepository.findByStatus(OffreStatus.APPROVED).stream()
                 .map(offreTransportMapper::offreTransportToDto)
-                .collect(Collectors.toList());
+                .toList(); // Changed to Stream.toList()
     }
 
     @Override
@@ -92,12 +89,11 @@ public class OffreTransportServiceImpl implements OffreTransportService {
                 .orElseThrow(() -> new ResourceNotFoundException("OffreTransport not found with id " + id));
     }
 
-
     @Override
     public List<OffreTransportDto> findRejectedOffres() {
         return offreTransportRepository.findByStatus(OffreStatus.REJECTED).stream()
                 .map(offreTransportMapper::offreTransportToDto)
-                .collect(Collectors.toList());
+                .toList(); // Changed to Stream.toList()
     }
 
     @Override
@@ -114,12 +110,8 @@ public class OffreTransportServiceImpl implements OffreTransportService {
         List<OffreTransport> offers = offreTransportRepository.findOffreTransportsByEmployeurId(employeurId);
         return offers.stream()
                 .map(offreTransportMapper::offreTransportToDto)
-                .collect(Collectors.toList());
+                .toList(); // Changed to Stream.toList()
     }
-
-
-
-
 
     @Override
     public OffreTransportDto rejectOffre(Long id) {

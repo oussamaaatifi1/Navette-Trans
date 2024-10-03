@@ -3,6 +3,8 @@ package com.platformtrasnport.platformtransport.controller;
 import com.platformtrasnport.platformtransport.dto.ReservationDto;
 import com.platformtrasnport.platformtransport.service.Impl.ReservationServiceImpl;
 import com.platformtrasnport.platformtransport.service.JwtService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +21,7 @@ public class ReservationController {
 
     private final ReservationServiceImpl reservationService;
     private final JwtService jwtService;
+    private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
 
     public ReservationController(ReservationServiceImpl reservationService, JwtService jwtService) {
         this.reservationService = reservationService;
@@ -30,7 +33,7 @@ public class ReservationController {
     public ResponseEntity<ReservationDto> createReservationWithTransaction(
             @RequestBody ReservationDto reservationDto,
             @RequestHeader("Authorization") String token) {
-        System.out.println("Incoming reservationDto: " + reservationDto);
+        logger.info("Incoming reservationDto: {}", reservationDto); // Using logger instead of System.out
 
         ReservationDto savedReservation = reservationService.createReservationWithTransaction(reservationDto, token);
         return new ResponseEntity<>(savedReservation, HttpStatus.CREATED);
@@ -57,7 +60,7 @@ public class ReservationController {
     @GetMapping("/reservationsByEmploye/{employeId}")
     @PreAuthorize("hasRole('EMPLOYEUR')")
     public ResponseEntity<List<ReservationDto>> getReservationsByEmployeId(@PathVariable Long employeId, Authentication authentication) {
-        authentication.getAuthorities().forEach(authority -> System.out.println(authority.getAuthority()));
+        authentication.getAuthorities().forEach(authority -> logger.info("Authority: {}", authority.getAuthority())); // Logging authorities
 
         List<ReservationDto> reservations = reservationService.findReservationsByEmployeId(employeId);
         if (reservations.isEmpty()) {

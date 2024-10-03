@@ -2,7 +2,6 @@ package com.platformtrasnport.platformtransport.controller;
 
 import com.platformtrasnport.platformtransport.dto.EmployeurDto;
 import com.platformtrasnport.platformtransport.service.Impl.EmployeurServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
