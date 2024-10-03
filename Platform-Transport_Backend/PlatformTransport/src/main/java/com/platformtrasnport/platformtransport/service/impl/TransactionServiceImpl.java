@@ -45,10 +45,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<TransactionDto> getAllTransactions() {
-        return transactionRepository.findAll().stream()
+        return List.copyOf(transactionRepository.findAll().stream()
                 .map(TransactionMapper.INSTANCE::transactionToDto)
-                .collect(Collectors.toList());
+                .toList());
     }
+
 
     @Override
     public TransactionDto updateTransaction(Long id, TransactionDto updatedTransactionDto) {
