@@ -6,9 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
-@Builder
 public class EmployeDto extends UtilisateurDto {
-
+        private String phone;
+        private String address;
+        private String dateOfBirth;
 }

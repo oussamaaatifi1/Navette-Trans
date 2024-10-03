@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface AdministrateurRepository extends JpaRepository<Administrateur, Long> {
     @Query("SELECT COUNT(u) FROM Employe u WHERE u.role = 'EMPLOYE'")
     long countAdministrateurs();
+
 }

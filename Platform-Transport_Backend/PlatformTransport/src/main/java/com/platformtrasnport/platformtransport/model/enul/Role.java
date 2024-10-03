@@ -6,12 +6,10 @@ public enum Role implements GrantedAuthority {
     EMPLOYE,
     EMPLOYEUR,
     ADMIN,
-    PARTICULIER,
-    ;
-
+    PARTICULIER;
 
     @Override
     public String getAuthority() {
-        return null;
+        return name(); // Return the role name
     }
 }

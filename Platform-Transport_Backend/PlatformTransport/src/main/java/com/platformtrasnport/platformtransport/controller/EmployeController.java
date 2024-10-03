@@ -1,8 +1,7 @@
 package com.platformtrasnport.platformtransport.controller;
 
-import com.platformtrasnport.platformtransport.model.Employe;
-import com.platformtrasnport.platformtransport.service.Impl.UtilisateurServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.platformtrasnport.platformtransport.dto.EmployeDto;
+import com.platformtrasnport.platformtransport.service.Impl.EmployeServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,35 +14,39 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 public class EmployeController {
 
-    @Autowired
-    private UtilisateurServiceImpl utilisateurService;
+    private final EmployeServiceImpl employeService;
+
+    // Constructor-based dependency injection
+    public EmployeController(EmployeServiceImpl employeService) {
+        this.employeService = employeService;
+    }
 
     @GetMapping
-    public List<Employe> getAllUtilisateurs() {
-        return utilisateurService.getAllUtilisateurs();
+    public List<EmployeDto> getAllUtilisateurs() {
+        return employeService.getAllEmployes();
     }
 
     @PostMapping
-    public ResponseEntity<Employe> createUtilisateur(@RequestBody Employe employe) {
-        Employe createdEmploye = utilisateurService.createUtilisateur(employe);
+    public ResponseEntity<EmployeDto> createUtilisateur(@RequestBody EmployeDto employeDto) {
+        EmployeDto createdEmploye = employeService.createEmploye(employeDto);
         return new ResponseEntity<>(createdEmploye, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employe> getUtilisateurById(@PathVariable("id") Long id) {
-        Optional<Employe> employe = utilisateurService.getUtilisateurById(id);
-        return employe.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<EmployeDto> getUtilisateurById(@PathVariable("id") Long id) {
+        Optional<EmployeDto> employeDto = employeService.getEmployeById(id);
+        return employeDto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employe> updateUtilisateur(@PathVariable("id") Long id, @RequestBody Employe employe) {
-        Optional<Employe> updatedEmploye = utilisateurService.updateUtilisateur(id, employe);
+    public ResponseEntity<EmployeDto> updateUtilisateur(@PathVariable("id") Long id, @RequestBody EmployeDto employeDto) {
+        Optional<EmployeDto> updatedEmploye = employeService.updateUtilisateur(id, employeDto);
         return updatedEmploye.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUtilisateur(@PathVariable("id") Long id) {
-        if (utilisateurService.deleteUtilisateur(id)) {
+        if (employeService.deleteUtilisateur(id)) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();

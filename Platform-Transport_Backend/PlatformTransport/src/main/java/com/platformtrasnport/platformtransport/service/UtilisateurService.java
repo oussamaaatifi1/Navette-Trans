@@ -1,16 +1,16 @@
 package com.platformtrasnport.platformtransport.service;
 
-import com.platformtrasnport.platformtransport.model.Employe;
+import com.platformtrasnport.platformtransport.dto.EmployeDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UtilisateurService {
 
-    List<Employe> getAllUtilisateurs();
-    public Employe createUtilisateur(Employe employe);
-    public Optional<Employe> getUtilisateurById(Long id);
-    public Optional<Employe> updateUtilisateur(Long id, Employe employe);
-    public boolean deleteUtilisateur(Long id);
+    List<EmployeDto> getAllUtilisateurs();
+    EmployeDto createUtilisateur(EmployeDto employe);
+    Optional<EmployeDto> getUtilisateurById(Long id);
+    Optional<EmployeDto> updateUtilisateur(Long id, EmployeDto employe);
+    boolean deleteUtilisateur(Long id);
 
 }

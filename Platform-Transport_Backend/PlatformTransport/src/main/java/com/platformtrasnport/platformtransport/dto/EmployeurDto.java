@@ -8,10 +8,6 @@ import lombok.Setter;
 import java.util.List;
 
 @Data
-@Getter
-@Setter
-@Builder
 public class EmployeurDto extends UtilisateurDto {
 
-    private List<OffreTransportDto> offreTransport;
 }

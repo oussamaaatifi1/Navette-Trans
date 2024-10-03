@@ -14,5 +14,10 @@ public class ReservationDto {
     private LocalDate dateReservation;
     private Long employeId;
     private Long offreId;
+    private float montant;
     private Long transactionId;
+    private int nombrePlaces;
+    private String pointDepart;
+    private String destination;
+
 }

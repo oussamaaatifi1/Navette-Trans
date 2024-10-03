@@ -4,7 +4,7 @@
     import com.platformtrasnport.platformtransport.auth.AuthenticationResponse;
     import com.platformtrasnport.platformtransport.auth.RegisterRequest;
     import com.platformtrasnport.platformtransport.model.*;
-    import com.platformtrasnport.platformtransport.model.enul.Role; // Import the correct Role enum
+    import com.platformtrasnport.platformtransport.model.enul.Role;
     import com.platformtrasnport.platformtransport.repository.UtilisateurRepository;
     import lombok.RequiredArgsConstructor;
     import org.springframework.security.authentication.AuthenticationManager;

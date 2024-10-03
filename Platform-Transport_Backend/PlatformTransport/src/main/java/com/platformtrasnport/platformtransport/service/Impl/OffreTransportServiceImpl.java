@@ -11,6 +11,7 @@ import com.platformtrasnport.platformtransport.service.JwtService;
 import com.platformtrasnport.platformtransport.service.OffreTransportService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,17 +24,20 @@ import java.util.stream.Collectors;
 @Service
 public class OffreTransportServiceImpl implements OffreTransportService {
 
-    @Autowired
-    private OffreTransportRepository offreTransportRepository;
+    private final OffreTransportRepository offreTransportRepository;
+    private final OffreTransportMapper offreTransportMapper;
+    private final EmployeurRepository employeurRepository;
+    private final JwtService jwtService;
 
-    @Autowired
-    private OffreTransportMapper offreTransportMapper;
-
-    @Autowired
-    private EmployeurRepository employeurRepository;
-
-    @Autowired
-    private JwtService jwtService;
+    public OffreTransportServiceImpl(OffreTransportRepository offreTransportRepository,
+                                     OffreTransportMapper offreTransportMapper,
+                                     EmployeurRepository employeurRepository,
+                                     JwtService jwtService) {
+        this.offreTransportRepository = offreTransportRepository;
+        this.offreTransportMapper = offreTransportMapper;
+        this.employeurRepository = employeurRepository;
+        this.jwtService = jwtService;
+    }
 
     @Override
     public OffreTransportDto createOffreTransport(OffreTransportDto offreTransportDto, String token) {
@@ -82,6 +86,14 @@ public class OffreTransportServiceImpl implements OffreTransportService {
     }
 
     @Override
+    public OffreTransportDto findApprovedOffreById(Long id) {
+        return offreTransportRepository.findByIdAndStatus(id, OffreStatus.APPROVED)
+                .map(offreTransportMapper::offreTransportToDto)
+                .orElseThrow(() -> new ResourceNotFoundException("OffreTransport not found with id " + id));
+    }
+
+
+    @Override
     public List<OffreTransportDto> findRejectedOffres() {
         return offreTransportRepository.findByStatus(OffreStatus.REJECTED).stream()
                 .map(offreTransportMapper::offreTransportToDto)
@@ -104,6 +116,10 @@ public class OffreTransportServiceImpl implements OffreTransportService {
                 .map(offreTransportMapper::offreTransportToDto)
                 .collect(Collectors.toList());
     }
+
+
+
+
 
     @Override
     public OffreTransportDto rejectOffre(Long id) {

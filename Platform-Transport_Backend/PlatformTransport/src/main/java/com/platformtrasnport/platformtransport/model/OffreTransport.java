@@ -31,9 +31,9 @@
         private float prix;
         private String imgUrl;
         private OffreStatus status;
-//        private RejectionReason rejectionReason;
+//      private RejectionReason rejectionReason;
 
-        @ManyToOne(cascade = CascadeType.ALL)
+        @ManyToOne
         @JoinColumn(name = "employeur_id")
         private Employeur employeur;
 

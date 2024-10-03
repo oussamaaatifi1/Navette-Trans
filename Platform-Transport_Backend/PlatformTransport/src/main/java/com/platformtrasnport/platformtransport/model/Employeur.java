@@ -14,8 +14,7 @@ import java.util.List;
 @DiscriminatorValue("Employeur")
 public class Employeur extends Utilisateur {
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "offretansport_id")
+    @OneToMany(mappedBy = "employeur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OffreTransport> offreTransport;
 
 

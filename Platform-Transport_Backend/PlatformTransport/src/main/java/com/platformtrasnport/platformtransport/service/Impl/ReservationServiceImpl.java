@@ -2,78 +2,118 @@ package com.platformtrasnport.platformtransport.service.Impl;
 
 import com.platformtrasnport.platformtransport.dto.ReservationDto;
 import com.platformtrasnport.platformtransport.mapper.ReservationMapper;
-import com.platformtrasnport.platformtransport.model.Employe;
-import com.platformtrasnport.platformtransport.model.OffreTransport;
-import com.platformtrasnport.platformtransport.model.Reservation;
-import com.platformtrasnport.platformtransport.model.Transaction;
-import com.platformtrasnport.platformtransport.repository.EmployeRepository;
-import com.platformtrasnport.platformtransport.repository.OffreTransportRepository;
-import com.platformtrasnport.platformtransport.repository.ReservationRepository;
-import com.platformtrasnport.platformtransport.repository.TransactionRepository;
+import com.platformtrasnport.platformtransport.model.*;
+import com.platformtrasnport.platformtransport.repository.*;
+import com.platformtrasnport.platformtransport.service.JwtService;
 import com.platformtrasnport.platformtransport.service.ReservationService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ReservationServiceImpl.class);
+    private final ReservationRepository reservationRepository;
 
-    @Autowired
-    private ReservationRepository reservationRepository;
+    private final EmployeRepository employeRepository;
 
-    @Autowired
-    private EmployeRepository employeRepository;
+    private final OffreTransportRepository offreTransportRepository;
 
-    @Autowired
-    private OffreTransportRepository offreTransportRepository;
+    private final TransactionRepository transactionRepository;
 
-    @Autowired
-    private TransactionRepository transactionRepository;
+    private final ReservationMapper reservationMapper;
 
-    @Autowired
-    private ReservationMapper reservationMapper;
+    private final JwtService jwtService;
+
+    public ReservationServiceImpl(ReservationRepository reservationRepository, EmployeRepository employeRepository, OffreTransportRepository offreTransportRepository, TransactionRepository transactionRepository, ReservationMapper reservationMapper, JwtService jwtService) {
+        this.reservationRepository = reservationRepository;
+        this.employeRepository = employeRepository;
+        this.offreTransportRepository = offreTransportRepository;
+        this.transactionRepository = transactionRepository;
+        this.reservationMapper = reservationMapper;
+        this.jwtService = jwtService;
+    }
 
     @Override
-    public ReservationDto reserve(ReservationDto reservationDto) {
-        Reservation reservation = reservationMapper.dtoToReservation(reservationDto);
+    @Transactional
+    public ReservationDto createReservationWithTransaction(ReservationDto reservationDto, String token) {
+        // Extract employee ID from token
+        Long employeId = jwtService.extractUserId(token.substring(7));
+        Employe employe = employeRepository.findById(employeId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employe not found"));
 
-        // Fetch and set related entities based on IDs
-        if (reservationDto.getEmployeId() != null) {
-            Employe employe = employeRepository.findById(reservationDto.getEmployeId())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employe not found"));
-            reservation.setEmploye(employe);
+        // Get the transport offer
+        OffreTransport offre = offreTransportRepository.findById(reservationDto.getOffreId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "OffreTransport not found"));
+
+        // Check available seats
+        if (offre.getNombrePlaces() < reservationDto.getNombrePlaces()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not enough available seats");
         }
 
-        if (reservationDto.getOffreId() != null) {
-            OffreTransport offre = offreTransportRepository.findById(reservationDto.getOffreId())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "OffreTransport not found"));
-            reservation.setOffre(offre);
+        // Calculate total price
+        float totalPrice = offre.getPrix() * reservationDto.getNombrePlaces(); // Ensure prix is also of type double
 
-            if (offre.getNombrePlaces() <= 0) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No available seats");
-            }
-            offre.setNombrePlaces(offre.getNombrePlaces() - 1);
-            offreTransportRepository.save(offre);
-        }
+        // Create reservation
+        Reservation reservation = new Reservation();
+        reservation.setEmploye(employe);
+        reservation.setOffre(offre);
+        reservation.setDateReservation(reservationDto.getDateReservation() != null ? reservationDto.getDateReservation() : LocalDate.now());
+        reservation.setNombrePlaces(reservationDto.getNombrePlaces());
 
-        if (reservationDto.getTransactionId() != null) {
-            Transaction transaction = transactionRepository.findById(reservationDto.getTransactionId())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction not found"));
-            reservation.setTransaction(transaction);
-        }
+        // Set pointDepart and destination from the OffreTransport
+        reservation.setPointDepart(offre.getPointDepart());
+        reservation.setDestination(offre.getDestination());
 
-        reservation.setDateReservation(LocalDate.now());
+        // Update available seats
+        offre.setNombrePlaces(offre.getNombrePlaces() - reservationDto.getNombrePlaces());
+        offreTransportRepository.save(offre);
 
+        // Create and set the transaction
+        Transaction transaction = new Transaction();
+        transaction.setEmploye(employe);
+        transaction.setMontant(totalPrice); // Ensure montant is also of type double
+        transaction.setDate(new Date());  // Using java.util.Date as per TransactionDto
+        transaction.setReservation(reservation);
+
+        reservation.setTransaction(transaction);
+
+        // Save the reservation
         Reservation savedReservation = reservationRepository.save(reservation);
-        return reservationMapper.reservationToDto(savedReservation);
+
+        // Update and save the transaction
+        transaction.setReservation(savedReservation);
+        Transaction savedTransaction = transactionRepository.save(transaction);
+
+        // Create ReservationDto to return
+        ReservationDto savedReservationDto = reservationMapper.reservationToDto(savedReservation);
+        savedReservationDto.setMontant(totalPrice);
+        savedReservationDto.setTransactionId(savedTransaction.getId());
+        savedReservationDto.setEmployeId(employeId);
+
+        // Include pointDepart and destination in the DTO
+        savedReservationDto.setPointDepart(reservation.getPointDepart());
+        savedReservationDto.setDestination(reservation.getDestination());
+
+        return savedReservationDto;
+    }
+
+
+
+
+    @Override
+    public List<ReservationDto> findReservationsByEmployeId(Long employeId) {
+        List<Reservation> reservations = reservationRepository.findReservationsByEmployeId(employeId);
+        return reservations.stream()
+                .map(reservationMapper::reservationToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -88,10 +128,11 @@ public class ReservationServiceImpl implements ReservationService {
         List<Reservation> reservations = reservationRepository.findAll();
         return reservations.stream()
                 .map(reservationMapper::reservationToDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public ReservationDto updateReservation(Long id, ReservationDto reservationDto) {
         Reservation existingReservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation not found"));
@@ -109,19 +150,14 @@ public class ReservationServiceImpl implements ReservationService {
             OffreTransport offre = offreTransportRepository.findById(reservationDto.getOffreId())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "OffreTransport not found"));
             existingReservation.setOffre(offre);
-
-            // Update seats in OffreTransport
-            if (offre.getNombrePlaces() <= 0) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No available seats");
-            }
-            offre.setNombrePlaces(offre.getNombrePlaces() - 1);
-            offreTransportRepository.save(offre);
         }
 
-        if (reservationDto.getTransactionId() != null) {
-            Transaction transaction = transactionRepository.findById(reservationDto.getTransactionId())
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction not found"));
-            existingReservation.setTransaction(transaction);
+        // Update transaction if montant has changed
+        if (existingReservation.getTransaction() != null &&
+                existingReservation.getTransaction().getMontant() != reservationDto.getMontant()) {
+            Transaction transaction = existingReservation.getTransaction();
+            transaction.setMontant(reservationDto.getMontant());
+            transactionRepository.save(transaction);
         }
 
         Reservation updatedReservation = reservationRepository.save(existingReservation);
@@ -129,10 +165,32 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    @Transactional
     public void deleteReservation(Long id) {
-        if (!reservationRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation not found");
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation not found"));
+
+        // Restore the seat in OffreTransport
+        OffreTransport offre = reservation.getOffre();
+        offre.setNombrePlaces(offre.getNombrePlaces() + 1);
+        offreTransportRepository.save(offre);
+
+        // Delete associated transaction if exists
+        if (reservation.getTransaction() != null) {
+            transactionRepository.delete(reservation.getTransaction());
         }
-        reservationRepository.deleteById(id);
+
+        reservationRepository.delete(reservation);
     }
+
+    @Override
+    public Long countTotalReservations() {
+        return reservationRepository.countTotalReservations();
+    }
+
+    @Override
+    public List<Object[]> getMontantSumByEmploye() {
+        return reservationRepository.sumMontantByEmploye();
+    }
+
 }

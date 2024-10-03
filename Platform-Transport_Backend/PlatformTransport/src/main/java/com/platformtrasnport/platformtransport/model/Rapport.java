@@ -21,4 +21,7 @@ public class Rapport {
     @Temporal(TemporalType.DATE)
     private LocalDate dateRapport;
 
+    @ManyToOne
+    @JoinColumn(name = "administrateur_id")
+    private Administrateur administrateur;
 }

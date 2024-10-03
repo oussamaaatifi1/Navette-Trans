@@ -6,9 +6,9 @@ services:
     container_name: psql-db
     restart: always
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=1234
-      - POSTGRES_DB=platforme
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=PlatformTransport
     ports:
       - '5432:5432'
 

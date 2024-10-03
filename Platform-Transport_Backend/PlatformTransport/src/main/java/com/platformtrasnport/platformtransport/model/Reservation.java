@@ -16,19 +16,19 @@ public class Reservation {
     private Long id;
 
     private LocalDate dateReservation;
+    private int nombrePlaces;
 
-    // Foreign key for the employee making the reservation
+    private String pointDepart;
+    private String destination;
     @ManyToOne
     @JoinColumn(name = "employe_id", nullable = false)  // Corrected FK name to match `Employe` entity
     private Employe employe;
 
-    // Foreign key for the offer being reserved
     @ManyToOne
     @JoinColumn(name = "offre_id", nullable = false)    // Added nullable=false to ensure integrity
     private OffreTransport offre;
 
-    // Foreign key for the transaction related to the reservation
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "transaction_id", nullable = false)
     private Transaction transaction;
 }

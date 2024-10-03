@@ -9,8 +9,6 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Data
-@Getter
-@Setter
 public class OffreTransportDto {
     private Long id;
     private TypeOffreTransport typeOffreTransport;
@@ -22,5 +20,4 @@ public class OffreTransportDto {
     private String imgUrl;
     private OffreStatus status;
     private Long employeurId;
-
 }

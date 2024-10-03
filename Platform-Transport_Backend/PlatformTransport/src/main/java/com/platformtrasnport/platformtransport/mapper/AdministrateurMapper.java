@@ -3,12 +3,9 @@ package com.platformtrasnport.platformtransport.mapper;
 import com.platformtrasnport.platformtransport.dto.AdministrateurDto;
 import com.platformtrasnport.platformtransport.model.Administrateur;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
-//@Mapper(componentModel = "spring", uses = {UtilisateurMapper.class})
+@Mapper(componentModel = "spring")
 public interface AdministrateurMapper {
-    AdministrateurMapper INSTANCE = Mappers.getMapper(AdministrateurMapper.class);
-
-    AdministrateurDto administrateurToDto(Administrateur administrateur);
-    Administrateur dtoToAdministrateur(AdministrateurDto dto);
+    AdministrateurDto toDto(Administrateur administrateur);
+    Administrateur toEntity(AdministrateurDto administrateurDto);
 }

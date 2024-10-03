@@ -1,5 +1,8 @@
 package com.platformtrasnport.platformtransport.service;
 
+import com.platformtrasnport.platformtransport.model.Administrateur;
+
 public interface AdministrateurService {
-    public long getAdministrateurCount();
+    long getAdministrateurCount();
+    Administrateur findById(Long id);
 }
