@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeurServiceImpl implements EmployeurService {
@@ -27,7 +26,7 @@ public class EmployeurServiceImpl implements EmployeurService {
     public List<EmployeurDto> getAllEmployeurs() {
         return employeurRepository.findAll().stream()
                 .map(employeurMapper::employeurToDto)
-                .collect(Collectors.toList());
+                .toList(); // Changed to Stream.toList()
     }
 
     @Override

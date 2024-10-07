@@ -14,7 +14,8 @@ import java.util.List;
 public class Employeur extends Utilisateur {
 
     @OneToMany(mappedBy = "employeur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OffreTransport> offre;
+
+    private List<OffreTransport> offreTransportList;
 
 
 }
