@@ -4,6 +4,7 @@ import com.platformtrasnport.platformtransport.dto.EmployeDto;
 import com.platformtrasnport.platformtransport.service.impl.EmployeServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,29 +22,34 @@ public class EmployeController {
     }
 
     @GetMapping
+//    @PreAuthorize("hasAnyAuthority('EMPLOYEUR', 'EMPLOYE')")
     public List<EmployeDto> getAllUtilisateurs() {
         return employeService.getAllEmployes();
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('EMPLOYEUR')")
     public ResponseEntity<EmployeDto> createUtilisateur(@RequestBody EmployeDto employeDto) {
         EmployeDto createdEmploye = employeService.createEmploye(employeDto);
         return new ResponseEntity<>(createdEmploye, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('EMPLOYEUR', 'EMPLOYE')")
     public ResponseEntity<EmployeDto> getUtilisateurById(@PathVariable("id") Long id) {
         Optional<EmployeDto> employeDto = employeService.getEmployeById(id);
         return employeDto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('EMPLOYE')")
     public ResponseEntity<EmployeDto> updateUtilisateur(@PathVariable("id") Long id, @RequestBody EmployeDto employeDto) {
         Optional<EmployeDto> updatedEmploye = employeService.updateUtilisateur(id, employeDto);
         return updatedEmploye.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Void> deleteUtilisateur(@PathVariable("id") Long id) {
         if (employeService.deleteUtilisateur(id)) {
             return ResponseEntity.noContent().build();

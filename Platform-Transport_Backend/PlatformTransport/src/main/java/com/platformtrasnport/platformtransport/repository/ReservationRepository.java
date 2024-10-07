@@ -16,7 +16,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query("SELECT COUNT(r) FROM Reservation r")
     Long countTotalReservations();
 
-    @Query("SELECT r.employe.id, SUM(r.transaction.montant) FROM Reservation r GROUP BY r.employe.id")
+    @Query("SELECT SUM(r.transaction.montant) FROM Reservation r")
     List<Object[]> sumMontantByEmploye();
 
 }

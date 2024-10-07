@@ -8,7 +8,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=PlatformTransport
+      - POSTGRES_DB=platforme
     ports:
       - '5432:5432'
 
@@ -18,9 +18,9 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '8081:8081'
+      - '8088:8088'
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/PlatformTransport
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/platforme
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=admin
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update

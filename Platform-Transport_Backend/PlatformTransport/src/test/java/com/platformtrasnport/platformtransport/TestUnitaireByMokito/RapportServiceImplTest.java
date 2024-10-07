@@ -25,7 +25,6 @@ class RapportServiceImplTest {
     @Mock
     private RapportRepository rapportRepository;
 
-    // Create a mock for the RapportMapper
     @Mock
     private RapportMapper rapportMapper;
 

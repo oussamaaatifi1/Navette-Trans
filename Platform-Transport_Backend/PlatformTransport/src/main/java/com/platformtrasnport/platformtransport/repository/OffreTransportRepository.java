@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Repository
 public interface OffreTransportRepository extends JpaRepository<OffreTransport, Long> {
-    List<OffreTransport> findByPointDepart(String pointDepart);
     List<OffreTransport> findByStatus(OffreStatus status);
     List<OffreTransport> findOffreTransportsByEmployeurId(Long employeurId);
     Optional<OffreTransport> findByIdAndStatus(Long id, OffreStatus status);

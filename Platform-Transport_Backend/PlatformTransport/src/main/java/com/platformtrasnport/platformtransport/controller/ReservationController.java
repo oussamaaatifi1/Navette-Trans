@@ -91,13 +91,13 @@ public class ReservationController {
     }
 
     @GetMapping("/count-by-employe")
-    @PreAuthorize("hasAnyRole('EMPLOYEUR','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLOYEUR','ADMIN')")
     public Long countTotalReservations() {
         return reservationService.countTotalReservations();
     }
 
     @GetMapping("/sum-by-employe")
-    @PreAuthorize("hasAnyRole('EMPLOYEUR', 'ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLOYEUR', 'ADMIN')")
     public List<Object[]> sumMontantByEmploye() {
         return reservationService.getMontantSumByEmploye();
     }
