@@ -77,7 +77,8 @@ Le projet de plateforme de transport pour employés et voyages spécifiques vise
 
 ### 3. Diagramme de Séquence
 
-![Diagramme de Séquence](https://github.com/user-attachments/assets/803f814a-c1e4-4580-afa4-3d2ef8970f2b)
+![Diagramme de Séquence]![image](https://github.com/user-attachments/assets/9c81a09c-6556-4ad4-ba83-fbe4d5cf12fa)
+
 
 
 ## Installation
