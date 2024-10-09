@@ -70,7 +70,8 @@ Le projet de plateforme de transport pour employés et voyages spécifiques vise
 
 ### 2. Diagramme de Classe
 
-![Diagramme de Classe]![image](https://github.com/user-attachments/assets/fe93c1f2-a2ec-4b79-aa84-9a8faf681b97)
+![Diagramme de Classe]![image]![image](https://github.com/user-attachments/assets/d89be510-4270-46d1-960e-f1d0392443d4)
+
 
 
 
