@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @Entity
 @Getter
@@ -14,6 +13,4 @@ import java.util.List;
 @DiscriminatorValue("Administrateur")
 public class Administrateur extends Utilisateur {
 
-    @OneToMany(mappedBy = "administrateur", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Rapport> rapports;
 }
