@@ -1,7 +1,5 @@
 package com.platformtrasnport.platformtransport.mapper;
 
-import com.platformtrasnport.platformtransport.dto.RapportDto;
-import com.platformtrasnport.platformtransport.model.Rapport;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

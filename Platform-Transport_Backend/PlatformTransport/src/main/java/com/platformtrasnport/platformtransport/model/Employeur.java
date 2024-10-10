@@ -15,7 +15,6 @@ import java.util.List;
 public class Employeur extends Utilisateur implements Serializable {
 
     @OneToMany(mappedBy = "employeur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
     private List<OffreTransport> offreTransportList;
 
 

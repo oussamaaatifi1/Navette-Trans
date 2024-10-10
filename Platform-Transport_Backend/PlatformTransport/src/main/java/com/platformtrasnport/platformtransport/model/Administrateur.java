@@ -1,11 +1,11 @@
 package com.platformtrasnport.platformtransport.model;
 
 import jakarta.persistence.*;
-
-import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,9 +14,6 @@ import lombok.Setter;
 @DiscriminatorValue("Administrateur")
 public class Administrateur extends Utilisateur {
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "administrateur_id")
-    private Administrateur admin;
-
-
+    @OneToMany(mappedBy = "administrateur", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rapport> rapports;
 }

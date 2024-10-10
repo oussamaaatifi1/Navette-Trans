@@ -20,15 +20,18 @@ public class Reservation {
 
     private String pointDepart;
     private String destination;
+
+
     @ManyToOne
-    @JoinColumn(name = "employe_id", nullable = false)  // Corrected FK name to match `Employe` entity
+    @JoinColumn(name = "employe_id", nullable = false)
     private Employe employe;
 
     @ManyToOne
-    @JoinColumn(name = "offre_id", nullable = false)    // Added nullable=false to ensure integrity
+    @JoinColumn(name = "offre_id", nullable = false)
     private OffreTransport offre;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "transaction_id", nullable = false)
     private Transaction transaction;
+
 }

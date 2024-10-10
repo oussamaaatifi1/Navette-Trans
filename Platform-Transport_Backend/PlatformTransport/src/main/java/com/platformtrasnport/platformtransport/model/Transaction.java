@@ -24,7 +24,6 @@ public class Transaction {
     @JoinColumn(name = "employe_id", nullable = false)
     private Employe employe;
 
-    // Bidirectional mapping with Reservation
     @OneToOne(mappedBy = "transaction")
     private Reservation reservation;
 }

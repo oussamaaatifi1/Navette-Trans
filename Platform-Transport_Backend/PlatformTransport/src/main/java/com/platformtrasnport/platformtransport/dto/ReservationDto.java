@@ -19,5 +19,4 @@ public class ReservationDto {
     private int nombrePlaces;
     private String pointDepart;
     private String destination;
-
 }

@@ -21,21 +21,6 @@
         private final JwtService jwtService;
         private final AuthenticationManager authenticationManager;
 
-        public AuthenticationResponse registerParticulier(RegisterRequest request) {
-            Utilisateur user = new Particulier();
-            user.setNom(request.getNom());
-            user.setPrenom(request.getPrenom());
-            user.setEmail(request.getEmail());
-            user.setPassword(passwordEncoder.encode(request.getPassword())); // Ensure correct field name
-            user.setRole(Role.PARTICULIER);
-            userdao.save(user);
-
-            var jwtToken = jwtService.generateToken(user, user.getId());
-            return AuthenticationResponse.builder()
-                    .token(jwtToken)
-                    .build();
-        }
-
         public AuthenticationResponse registerAdmin(RegisterRequest request) {
             Utilisateur admin = new Administrateur();
             admin.setNom(request.getNom());
@@ -71,7 +56,7 @@
             employeur.setNom(request.getNom());
             employeur.setPrenom(request.getPrenom());
             employeur.setEmail(request.getEmail());
-            employeur.setPassword(passwordEncoder.encode(request.getPassword())); // Ensure correct field name
+            employeur.setPassword(passwordEncoder.encode(request.getPassword()));
             employeur.setRole(Role.EMPLOYEUR);
             userdao.save(employeur);
 
