@@ -90,15 +90,4 @@ public class JwtService {
         Claims claims = extractAllClaims(token);
         return claims.get("userId", Long.class);
     }
-    public Long extractUserIdFromAuthentication(Authentication authentication) {
-        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String jwtToken = userDetails.getUsername();
-
-            // Extract userId from the token
-            return extractUserId(jwtToken);
-        }
-        throw new IllegalArgumentException("Authentication object is invalid.");
-    }
-
 }
