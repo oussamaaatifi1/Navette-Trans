@@ -26,10 +26,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/register/registerEmploye", "/auth/authenticate","/auth/register/registerAdmin").permitAll()
-                        .requestMatchers("/api/offres-transport/approved","/api/rapports/**").hasAuthority("EMPLOYE")
+//                        .requestMatchers("/api/offres-transport/approved").hasAuthority("EMPLOYE")
                         .requestMatchers("/api/employeurs/**", "/auth/register/registerEmployeur").hasAuthority("ADMIN")
-                        .requestMatchers("/api/reservations/**").hasAnyAuthority("EMPLOYEUR", "ADMIN","EMPLOYE")
-                        .requestMatchers("/api/utilisateurs/**").hasAnyAuthority("EMPLOYEUR", "EMPLOYE", "ADMIN")
+                        .requestMatchers("/api/reservations/**").hasAnyAuthority("EMPLOYEUR","EMPLOYE")
+                        .requestMatchers("/api/utilisateurs/**","/api/offres-transport/approved").hasAnyAuthority("EMPLOYEUR", "EMPLOYE", "ADMIN")
                 // Use hasAuthority here
                         .anyRequest().authenticated()
                 )

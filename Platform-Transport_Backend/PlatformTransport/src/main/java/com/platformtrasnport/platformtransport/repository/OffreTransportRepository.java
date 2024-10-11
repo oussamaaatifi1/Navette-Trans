@@ -15,7 +15,4 @@ public interface OffreTransportRepository extends JpaRepository<OffreTransport, 
     List<OffreTransport> findByStatus(OffreStatus status);
     List<OffreTransport> findOffreTransportsByEmployeurId(Long employeurId);
     Optional<OffreTransport> findByIdAndStatus(Long id, OffreStatus status);
-
-    @Query("SELECT r FROM Reservation r WHERE r.employe.id = :employeId")
-    List<Reservation> findReservationsByEmployeId(Long employeId);
 }

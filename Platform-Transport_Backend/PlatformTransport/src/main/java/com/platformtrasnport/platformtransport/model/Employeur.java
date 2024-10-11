@@ -18,4 +18,5 @@ public class Employeur extends Utilisateur implements Serializable {
     private List<OffreTransport> offreTransportList;
 
 
+
 }

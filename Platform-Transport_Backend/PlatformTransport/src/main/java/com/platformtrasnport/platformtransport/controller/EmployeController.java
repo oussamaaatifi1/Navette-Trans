@@ -22,20 +22,19 @@ public class EmployeController {
     }
 
     @GetMapping
-//    @PreAuthorize("hasAnyAuthority('EMPLOYEUR', 'EMPLOYE')")
+    @PreAuthorize("hasAuthority('EMPLOYEUR')")
     public List<EmployeDto> getAllUtilisateurs() {
         return employeService.getAllEmployes();
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('EMPLOYEUR')")
     public ResponseEntity<EmployeDto> createUtilisateur(@RequestBody EmployeDto employeDto) {
         EmployeDto createdEmploye = employeService.createEmploye(employeDto);
         return new ResponseEntity<>(createdEmploye, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('EMPLOYEUR', 'EMPLOYE')")
+    @PreAuthorize("hasAuthority('EMPLOYEUR')")
     public ResponseEntity<EmployeDto> getUtilisateurById(@PathVariable("id") Long id) {
         Optional<EmployeDto> employeDto = employeService.getEmployeById(id);
         return employeDto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());

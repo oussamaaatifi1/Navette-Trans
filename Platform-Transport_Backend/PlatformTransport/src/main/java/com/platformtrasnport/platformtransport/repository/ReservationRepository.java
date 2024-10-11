@@ -1,5 +1,6 @@
 package com.platformtrasnport.platformtransport.repository;
 
+import com.platformtrasnport.platformtransport.model.Employeur;
 import com.platformtrasnport.platformtransport.model.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +19,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query("SELECT SUM(r.transaction.montant) FROM Reservation r")
     List<Object[]> sumMontantByEmploye();
+
+
 
 }
