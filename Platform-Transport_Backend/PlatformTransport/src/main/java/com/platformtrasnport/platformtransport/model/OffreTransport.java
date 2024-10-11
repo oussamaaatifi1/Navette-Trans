@@ -6,12 +6,13 @@
     import lombok.Getter;
     import lombok.Setter;
 
+    import java.io.Serializable;
     import java.time.LocalDate;
 
     @Entity
     @Getter
     @Setter
-    public class OffreTransport {
+    public class OffreTransport implements Serializable {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

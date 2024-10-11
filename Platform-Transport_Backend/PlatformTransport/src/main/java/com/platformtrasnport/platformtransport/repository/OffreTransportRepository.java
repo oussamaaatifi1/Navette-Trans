@@ -1,10 +1,8 @@
 package com.platformtrasnport.platformtransport.repository;
 
 import com.platformtrasnport.platformtransport.model.OffreTransport;
-import com.platformtrasnport.platformtransport.model.Reservation;
 import com.platformtrasnport.platformtransport.model.enul.OffreStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
