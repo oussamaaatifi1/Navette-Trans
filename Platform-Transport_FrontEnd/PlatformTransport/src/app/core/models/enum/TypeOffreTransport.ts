@@ -1,5 +1,5 @@
-export enum TypeOffreTransport {
-    ECONOMIQUE = 'ECONOMIQUE',
-    SUV = 'SUV',
-    LUXE = 'LUXE'
-  }
+  export enum TypeOffreTransport {
+      ECONOMIQUE = 'ECONOMIQUE',
+      SUV = 'SUV',
+      LUXE = 'LUXE'
+    }

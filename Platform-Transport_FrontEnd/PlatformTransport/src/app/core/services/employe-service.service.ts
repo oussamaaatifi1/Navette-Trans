@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Employe } from '../models/Employe';
+import { EmployeDto } from '../models/EmployeDto';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,9 @@ export class EmployeServiceService {
   }
 
   // Get utilisateur by ID
-  getEmployeById(id: number): Observable<Employe> {
-    return this.http.get<Employe>(`${this.BaseURL}/${id}`);
-  }
+    getEmployeById(id: number): Observable<Employe> {
+      return this.http.get<Employe>(`${this.BaseURL}/${id}`);
+    }
 
   // Update an existing utilisateur
   updateEmploye(id: number, employe: Employe): Observable<Employe> {
@@ -35,5 +36,9 @@ export class EmployeServiceService {
   // Delete an utilisateur by ID
   deleteEmploye(id: number): Observable<void> {
     return this.http.delete<void>(`${this.BaseURL}/${id}`);
+  }
+
+  getEmployeByIds(id : number):Observable<Employe[]>{
+    return this.http.get<Employe[]>(this.BaseURL +"/get+employe/" +id);
   }
 }

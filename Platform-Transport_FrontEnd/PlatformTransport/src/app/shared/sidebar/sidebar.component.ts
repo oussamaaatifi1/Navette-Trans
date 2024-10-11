@@ -64,9 +64,6 @@ role: Role | null | undefined;
   isEmployeur(): boolean {
     return this.role?.toString() === Role[Role.EMPLOYEUR];
   }
-  isParticulier(): boolean {
-    return this.role?.toString() === Role[Role.PARTICULIER];
-  }
 
   addPannes(): void {
     this.router.navigate(['/pannes/add']);

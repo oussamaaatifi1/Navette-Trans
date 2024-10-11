@@ -25,7 +25,9 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // No need to check the current route for isEmployeur
+  }
 
   onSubmit(): void {
     if (this.registerForm.valid) {
@@ -34,22 +36,22 @@ export class RegisterComponent implements OnInit {
         nom,
         prenom,
         email,
-        password
+        password,
       };
 
+      // Directly call the registerEmploye method without any checks
       this.authService.registerEmploye(registerRequest).subscribe({
         next: (response) => {
-          console.log('Registration successful:', response);
-          this.router.navigate(['/login']); // Redirect after successful registration
+          console.log('Account creation successful:', response);
+          // Navigate to the dashboard for Employe
+          this.router.navigate(['/dashboard/EMPLOYE']);
         },
         error: (error) => {
-          console.error('Registration failed:', error);
-          // Optionally, you can show a user-friendly error message here
+          console.error('Account creation failed:', error);
         }
       });
     } else {
       console.error('Form is invalid');
-      // Optionally, you can show validation errors to the user here
     }
   }
 }

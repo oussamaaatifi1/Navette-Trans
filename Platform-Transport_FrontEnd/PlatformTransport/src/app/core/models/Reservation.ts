@@ -5,9 +5,8 @@ import { Transaction } from "./Transaction";
 export interface Reservation {
     id?: number;
     dateReservation: string;
-    employe: Employe;
+    employe?: Employe; // Kept | undefined to make it optional
     offre: OffreTransport;
     transaction?: Transaction;
     offreTransport?: OffreTransport;
-
 }

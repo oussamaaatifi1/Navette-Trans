@@ -7,6 +7,7 @@ import { ReservationService } from 'src/app/core/services/reservation.service';
 import { EmployeServiceService } from 'src/app/core/services/employe-service.service';
 import { Utilisateur } from 'src/app/core/models/utilisateur';
 import { Role } from 'src/app/core/models/enum/Role';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -17,6 +18,13 @@ export class NavbarComponent implements OnInit {
   nom: any;
   email: any;
   prenom: any;
+  reservation: Reservation[] = [];
+  employe: Employe[] = [];
+  isDropdownOpen = false;
+  utilisateur: Utilisateur[] = [];
+
+  isEmployesTabActive = true;
+  isReservationsTabActive = false;
 
   constructor(
     private router: Router,
@@ -26,27 +34,17 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const employeInfo = this.authService.getEmployeInfo();
+    if (employeInfo) {
+      this.email = employeInfo.email;
+      this.nom = employeInfo.nom;
+      this.role = employeInfo.role;
+    } else {
+      console.error('Failed to load employee information');
+    }
     this.getAllEmployes();
-    this.role = this.authService.getRole();
     // this.nom = this.authService.getNom();
-    this.email = this.authService.getEmail();
-    
   }
-
-  // getNom(): void {
-  //   this.authService.getNom()
-  // }
-
-  
-  isDropdownOpen = false;
-  utilisateur: Utilisateur[] = [];
-
-  // loadNewEmployees(): void {
-  //   this.loadNewEmployees();
-  //   this.employeeService.getAllEmployes().subscribe((employees) => {
-  //     this.employee = employees;
-  //   });
-  // }
 
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -57,21 +55,27 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  reservations: Reservation[] = [];
-
   getAllEmployes(): void {
     this.employeeService.getAllEmployes().subscribe((data) => {
       this.utilisateur = data;
     });
   }
 
+  
+  showEmployes() {
+    this.isEmployesTabActive = true;
+    this.isReservationsTabActive = false;
+  }
+
+  showReservations() {
+    this.isEmployesTabActive = false;
+    this.isReservationsTabActive = true;
+  }
+
   isAdmin(): boolean {
     return this.role?.toString() === Role[Role.ADMIN];
   }
-  // loadReservations(): void {
-  //   this.reservationService.getReservation(1).subscribe(
-  //     (data: Reservation) => this.reservations = [data], // Assuming you only need one reservation
-  //     error => console.error('Error fetching reservation', error)
-  //   );
-  // }
+  isEmployeur(): boolean {
+    return this.role?.toString() === Role[Role.EMPLOYEUR];
+  }
 }

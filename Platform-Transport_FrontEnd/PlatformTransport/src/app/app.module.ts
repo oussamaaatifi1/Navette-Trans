@@ -17,10 +17,8 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { DashboardAdminComponent } from './dashboards/dashboard-admin/dashboard-admin.component';
-import { DashboardEmployeComponent } from './dashboards/dashboard-employe/dashboard-employe.component';
 import { AdminCountComponent } from './dashboards/dashboard-admin/admin-count/admin-count.component';
 import { HistoriqueComponent } from './features/reservation/historique/historique.component';
-import { EmployeComponent } from './features/employes/employe/employe.component';
 import { CreatereserveComponent } from './features/reservation/createreserve/createreserve.component';
 import { EmployeProfileComponent } from './dashboards/dashboard-employe/employe-profile/employe-profile.component';
 import { ManagemntOffreComponent } from './dashboards/dashboard-admin/managemnt-offre/managemnt-offre.component';
@@ -29,14 +27,19 @@ import { OffreDiponibleComponent } from './dashboards/dashboard-employe/offre-di
 import { AuthenticationInterceptor } from './core/interceptors/authentication.interceptor';
 import { EmployesComponent } from './dashboards/dashboard-admin/employes/employes.component';
 import { EmployeursComponent } from './dashboards/dashboard-admin/employeur/employeur.component';
-import { HomePageComponent } from './home-page/home-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 import { DashboardEmployeurComponent } from './dashboards/dashboard-employeur/dashboard-employeur.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { EditEmployesComponent } from './dashboards/dashboard-admin/employes/edit-employes/edit-employes.component';
 import { SearchComponent } from './pages/search/search.component';
-
+import { NavbarEmployeComponent } from './shared/navbar-employe/navbar-employe.component';
+import { ReserveOffreComponent } from './dashboards/dashboard-employe/reserve-offre/reserve-offre.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ListReservationEmployeComponent } from './dashboards/dashboard-employeur/list-reservation-employe/list-reservation-employe.component';
+import { RegisterPopupComponent } from './dashboards/dashboard-admin/register-employeur/register-employeur.component';
+import { AuthService } from './core/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -53,10 +56,8 @@ import { SearchComponent } from './pages/search/search.component';
     FooterComponent,
     HeaderComponent,
     DashboardAdminComponent,
-    DashboardEmployeComponent,
     AdminCountComponent,
     HistoriqueComponent,
-    EmployeComponent,
     CreatereserveComponent,
     EmployeProfileComponent,
     ManagemntOffreComponent,
@@ -68,21 +69,27 @@ import { SearchComponent } from './pages/search/search.component';
     DashboardEmployeurComponent,
     EditEmployesComponent,
     SearchComponent,
-    
+    NavbarEmployeComponent,
+    ReserveOffreComponent,
+    ListReservationEmployeComponent,
+    RegisterPopupComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule,
   ],
-  
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
+    AuthService 
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { OffreTransport } from 'src/app/core/models/OffreTransport';
 import { OffreTransportService } from 'src/app/core/services/offre-transport.service';
-import { AuthService } from 'src/app/core/services/auth.service'; // Import your auth service
+import { AuthService } from 'src/app/core/services/auth.service'; 
 import { CreateComponent } from '../create/create.component';
 
 @Component({
@@ -17,7 +17,7 @@ export class ListOffreComponent implements OnInit {
 
   constructor(
     private offreTransportService: OffreTransportService,
-    private authService: AuthService, // Inject the auth service
+    private authService: AuthService,
     private router: Router,
     private dialog: MatDialog
   ) {}
@@ -30,7 +30,7 @@ export class ListOffreComponent implements OnInit {
     const token = this.authService.getToken();
   
     if (token) {
-      this.offreTransportService.getOffreTransportByEmployeur(token).subscribe(
+      this.offreTransportService.getOffreTransportByEmployeur().subscribe(
         data => {
           this.offreTransport = data;
         },
@@ -40,7 +40,6 @@ export class ListOffreComponent implements OnInit {
       );
     } else {
       console.error('Token is null or invalid');
-      // You can redirect to login page or show an error message
     }
   }
 

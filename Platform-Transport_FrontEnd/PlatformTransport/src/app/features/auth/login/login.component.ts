@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   errorMessage: string | null = null;
+  isPasswordVisible: boolean = false; // New property for password visibility
 
   constructor(
     private service: AuthService,
@@ -26,18 +27,23 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // Method to toggle password visibility
+  togglePassword(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
   submitForm(form: FormGroup): void {
     if (form.invalid) {
       return;
     }
-  
+
     const { email, password } = form.value;
     this.service.login(email, password).subscribe(
       (response: { token: string }) => {
         this.service.saveToken(response.token);
         const role = this.service.getRole();
         const userId = this.service.getUserId(); // Retrieve userId from localStorage
-  
+
         console.log('User ID:', userId); // Check userId in console
         if (role) {
           const dashboardRoute = `/dashboard/${role}`;
@@ -53,6 +59,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  
-  
 }

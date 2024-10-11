@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+  
+  currentYear: number = new Date().getFullYear();
+
+  submitEmail(email: string) {
+    // Implement email submission logic here
+    console.log('Email submitted:', email);
+  }
 }

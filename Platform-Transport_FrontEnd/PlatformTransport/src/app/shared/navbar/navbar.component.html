@@ -1,99 +1,138 @@
-    <nav class="fixed top-0 w-full bg-blue-800 border-b border-blue-700 z-50">
-        <div class="px-3 py-3 lg:px-5 lg:pl-3 flex items-center justify-between">
-            <!-- Sidebar toggle button -->
-            <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
-                type="button"
-                class="inline-flex items-center p-2 text-gray-300 rounded-lg sm:hidden hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
-                <span class="sr-only">Open sidebar</span>
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                    <path clip-rule="evenodd" fill-rule="evenodd"
-                        d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z" />
-                </svg>
-            </button>
+<nav class="fixed top-0 w-full bg-blue-800 border-b border-blue-700 z-50">
+    <div class="px-3 py-3 lg:px-5 lg:pl-3 flex items-center justify-between">
+        <!-- Sidebar toggle button -->
+        <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
+            type="button"
+            class="inline-flex items-center p-2 text-gray-300 rounded-lg sm:hidden hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+            <span class="sr-only">Open sidebar</span>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path clip-rule="evenodd" fill-rule="evenodd"
+                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z" />
+            </svg>
+        </button>
 
-            <!-- Logo and title -->
-            <a href="https://flowbite.com" class="flex items-center">
-                <img src="https://i.ibb.co/YpsycgN/5269970.png" class="h-8 me-3" alt="FlowBite Logo" />
-                <span class="text-xl font-semibold text-white">IT Support</span>
-            </a>
+        <!-- Logo and title -->
+        <a href="https://flowbite.com" class="flex items-center">
+            <!-- <img src="" class="h-8 me-3" alt="FlowBite Logo" /> -->
+            <span class="text-xl font-semibold text-white">NAVETE TRANS</span>
+        </a>
 
-            <!-- Notifications and user profile -->
-            <div class="flex items-center space-x-3">
-                <!-- Notification dropdown -->
-                <div *ngIf="isAdmin()" class="relative">
-                    <button (click)="toggleDropdown()"
-                        class="p-2 text-gray-300 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500">
-                        <span class="sr-only">Open notifications</span>
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2a7 7 0 00-7 7v5.293l-.293.293A1 1 0 005 17h14a1 1 0 00.707-1.707L19 14.293V9a7 7 0 00-7-7z" />
-                        </svg>
-                    </button>
-                    <!-- Notification dropdown content -->
+        <!-- Notifications and user profile -->
+        <div class="flex items-center space-x-3">
+
+
+            <!-- Notification dropdown -->
+            <div class="relative">
+                <button (click)="toggleDropdown()"
+                    class="p-2 text-gray-300 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500">
+                    <span class="sr-only">Open notifications</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2a7 7 0 00-7 7v5.293l-.293.293A1 1 0 005 17h14a1 1 0 00.707-1.707L19 14.293V9a7 7 0 00-7-7z" />
+                    </svg>
+                </button>
+                <!-- Notification dropdown content -->
+                <div *ngIf="isDropdownOpen"
+                    class="absolute right-0 mt-2 w-64 bg-white divide-y divide-gray-200 rounded-lg shadow-lg dark:bg-blue-900 dark:divide-blue-700">
+                    <!-- Tab navigation -->
+                    <div class="flex justify-between border-b border-gray-200">
+                        <button *ngIf="isAdmin()" (click)="showEmployes()"
+                            class="flex-1 py-2 text-center text-sm font-medium text-gray-900 rounded-t-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-700">
+                            Employé
+                        </button>
+                        <button *ngIf="isEmployeur()" (click)="showReservations()"
+                            class="flex-1 py-2 text-center text-sm font-medium text-gray-900 rounded-t-lg hover:bg-gray-100 dark:text-white dark:hover:bg-blue-700">
+                            Reservation
+                        </button>
+                    </div>
+
+                    <!-- Employé Tab Content -->
                     <div *ngIf="isDropdownOpen"
                         class="absolute right-0 mt-2 w-64 bg-white divide-y divide-gray-200 rounded-lg shadow-lg dark:bg-blue-900 dark:divide-blue-700">
-                        <ul class="py-1">
+                        <ul *ngIf="isAdmin()" class="py-1">
                             <li *ngFor="let utilisateur of utilisateur">
                                 <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-blue-700">
-                                    <img class="rounded-full w-11 h-11" [src]="utilisateur.imgUrl" alt="Notification image">
+                                    <img class="rounded-full w-11 h-11" [src]="utilisateur.imgUrl"
+                                        alt="Notification image">
                                     <div class="w-full ps-3">
                                         <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-                                            <span class="font-semibold text-gray-900 dark:text-white">{{ utilisateur.prenom}} {{ utilisateur.nom }} </span>
+                                            <span class="font-semibold text-gray-900 dark:text-white">{{
+                                                utilisateur.prenom }} {{ utilisateur.nom }}</span>
                                         </div>
-                                        <div class="text-xs text-blue-600 dark:text-blue-500">{{ utilisateur.email }}</div>
+                                        <div class="text-xs text-blue-600 dark:text-blue-500">{{ utilisateur.email }}
+                                        </div>
                                     </div>
                                 </a>
                             </li>
                         </ul>
-                        <a href="#"
+                        <a routerLink="/listemploye"
+                            class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-blue-900 dark:hover:bg-blue-700 dark:text-white">View
+                            all</a>
+                    </div>
+
+                    <!-- Reservation Tab Content -->
+                    <div *ngIf="isReservationsTabActive" class="py-1">
+                        <ul *ngIf="isEmployeur()">
+                            <li *ngFor="let reservation of reservation">
+                                <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-blue-700">
+                                    <div class="w-full ps-3">
+                                        <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+                                            <span class="font-semibold text-gray-900 dark:text-white">{{
+                                                reservation.employe }}</span>
+                                        </div>
+                                        <div class="text-xs text-blue-600 dark:text-blue-500">{{ reservation.offre }}
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <a routerLink="#"
                             class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-blue-900 dark:hover:bg-blue-700 dark:text-white">View
                             all</a>
                     </div>
                 </div>
 
-                <!-- User profile menu -->
-                <div>
-                    <button type="button"
-                        class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                        aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                        <span class="sr-only">Open user menu</span>
-                        <img class="w-8 h-8 rounded-full"
-                            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
-                    </button>
+
+            </div>
+
+            <!-- User profile menu -->
+            <div>
+                <button type="button"
+                    class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-8 h-8 rounded-full"
+                        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                </button>
+            </div>
+            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                id="dropdown-user">
+                <div class="px-4 py-3" role="none">
+                    <p class="text-sm text-gray-900 dark:text-white" role="none">
+                        {{nom}} {{prenom}}
+                    </p>
+                    <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                        {{email}}
+                    </p>
                 </div>
-                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-                    id="dropdown-user">
-                    <div class="px-4 py-3" role="none">
-                        <p class="text-sm text-gray-900 dark:text-white" role="none">
-                            {{nom}} {{prenom}}
-                        </p>
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                            {{email}}
-                        </p>
-                    </div>
-                    <ul class="py-1" role="none">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                role="menuitem">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                role="menuitem">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                role="menuitem">Earnings</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                role="menuitem">Sign out</a>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="py-1" role="none">
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                            role="menuitem">Dashboard</a>
+                    </li>
+                    <li>
+                        <a routerLink="/profiles"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                            role="menuitem">Settings</a>
+                    </li>
+                    <li>
+                        <a (click)="logout()"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                            role="menuitem">Sign out</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>

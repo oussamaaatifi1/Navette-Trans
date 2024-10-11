@@ -1,0 +1,401 @@
+
+.bg-orange-500 {
+    background-color: #f97316;
+}
+
+.text-orange-500 {
+    color: #f97316;
+}
+
+.border-orange-500 {
+    border-color: #f97316;
+}
+
+/* Initial styles for buttons */
+button {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Initial state */
+.sign-in-btn {
+    background-color: white;
+    color: gray;
+    border: 1px solid gray;
+}
+
+.sign-up-btn {
+    background-color: orange;
+    color: white;
+}
+
+/* State when scrolled */
+.scrolled .sign-in-btn {
+    background-color: gray;
+    color: white;
+    border-color: transparent;
+}
+
+.scrolled .sign-up-btn {
+    background-color: white;
+    color: orange;
+    border: 1px solid orange;
+}
+
+@keyframes colorTransition {
+    0% {
+        background-color: #d1d5db; /* Gray */
+    }
+    50% {
+        background-color: #3b82f6; /* Blue */
+    }
+    100% {
+        background-color: #10b981; /* Green */
+    }
+}
+
+.color-transition {
+    animation: colorTransition 3s infinite;
+}
+
+.color-transition:hover {
+    animation: none; /* Stop animation on hover for a smoother effect */
+    background-color: #10b981; /* Green */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+.nav-link {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem; /* Space for the underline */
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #3b82f6; /* Blue color */
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+header {
+    margin: 0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.scrolled header {
+    margin: 0;
+    background-color: #f1f5f9; /* Light gray background when scrolled */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 1.125em;
+}
+
+.underline {
+    width: 60px; /* Adjusted width to match original design */
+    height: 4px; /* Adjusted height for better consistency */
+    background-color: #3490dc; /* Adjusted color */
+    margin: 0 auto 20px;
+}
+
+.process-steps {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem; /* Adding gap for consistency */
+}
+
+.step {
+    flex: 1 1 22%; /* Ensuring responsiveness and spacing */
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.step-icon {
+    background: #e0e0e0;
+    border-radius: 50%;
+    width: 80px; /* Adjusted size */
+    height: 80px; /* Adjusted size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    position: relative;
+    border: 2px dashed; /* Adding dashed border */
+}
+
+.step-icon-inner {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.step-1 .step-icon {
+    border-color: #20B2AA;
+}
+
+.step-1 .step-icon-inner {
+    background-color: #20B2AA;
+}
+
+.step-2 .step-icon {
+    border-color: #FFA500;
+}
+
+.step-2 .step-icon-inner {
+    background-color: #FFA500;
+}
+
+.step-3 .step-icon {
+    border-color: #2F4F4F;
+}
+
+.step-3 .step-icon-inner {
+    background-color: #2F4F4F;
+}
+
+.step h3 {
+    margin-bottom: 10px;
+}
+
+.step p {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.step-line {
+    width: 100%;
+    height: 3px;
+    margin-top: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.step-1 .step-line {
+    background-color: #20B2AA;
+}
+
+.step-2 .step-line {
+    background-color: #FFA500;
+}
+
+.step-3 .step-line {
+    background-color: #2F4F4F;
+}
+
+/* Ensure buttons are full-width on mobile */
+@media (max-width: 640px) {
+    button {
+        width: 100%; /* Makes buttons full width on mobile */
+        font-size: 16px; /* Adjust font size for readability */
+    }
+
+    .nav-link {
+        padding: 12px; /* Make links larger for easier clicking */
+        font-size: 18px; /* Increase font size for better readability */
+    }
+}
+
+/* Additional styling for mobile menu */
+#mobile-menu {
+    position: absolute; /* Optional for dropdown effect */
+    top: 100%; /* Position below the header */
+    left: 0;
+    right: 0;
+    z-index: 10; /* Ensure it appears above other content */
+    padding: 10px 0; /* Adds some space at the top and bottom */
+}
+
+/* Make the logo responsive */
+img {
+    max-width: 100%; /* Ensure the logo does not exceed its container */
+    height: auto; /* Keep the aspect ratio */
+}
+
+/* Optional: adjust button styles for mobile */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #6B7280;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scroll-container {
+    position: relative;
+    padding: 0 2rem;
+}
+
+.car-types-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding: 1rem 0;
+}
+
+.car-types-container::-webkit-scrollbar {
+    display: none;
+}
+
+.car-type {
+    flex: 0 0 auto;
+    width: 150px;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.car-type:hover {
+    transform: translateY(-5px);
+}
+
+.icon-container {
+    background-color: #F3F4F6;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.car-type:hover .icon-container {
+    background-color: #3B82F6; /* Blue background on hover */
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    transition: filter 0.3s ease;
+}
+
+.car-type:hover .icon {
+    filter: brightness(0) invert(1); /* Change icon to white on hover */
+}
+
+.car-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.car-count {
+    font-size: 0.875rem;
+    color: #6B7280;
+}
+
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.scroll-button:hover {
+    background-color: #3B82F6;
+    color: white;
+}
+
+.scroll-button.left {
+    left: 0;
+}
+
+.scroll-button.right {
+    right: 0;
+}
+
+.view-all-container {
+    margin-top: 2rem;
+}
+
+.view-all-button {
+    background-color: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.view-all-button:hover {
+    background-color: #3B82F6; /* Blue background on hover */
+    color: white;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    background-color: #3B82F6;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px 10px 0 0;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+
+

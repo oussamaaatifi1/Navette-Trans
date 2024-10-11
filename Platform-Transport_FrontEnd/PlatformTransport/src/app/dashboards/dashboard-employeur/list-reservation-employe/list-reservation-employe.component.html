@@ -1,0 +1,73 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+<main class="p-4 sm:ml-64 pt-20 bg-gray-50 text-gray-900 flex flex-col h-screen">
+
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col h-full">
+    <div class="px-6 py-4 bg-blue-600 text-white flex justify-between items-center">
+      <h2 class="text-2xl font-bold">Reservations</h2>
+    </div>
+
+    <!-- Wrapping the table in a scrollable div -->
+    <div class="overflow-x-auto overflow-y-auto max-h-[calc(100vh-160px)]"> <!-- Adjust this value based on your header/footer heights -->
+      <table class="min-w-full bg-white">
+        <thead class="bg-blue-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">ID</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Offer ID</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Reservation Date</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Employe</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Point Depart</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Destination</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Seats</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-blue-600 uppercase tracking-wider">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reserve of allReservations" class="bg-white border-b hover:bg-gray-50">
+            <td class="py-4 px-6">{{ reserve.id }}</td>
+            <td class="py-4 px-6">{{ reserve.offreId }}</td>
+            <td class="py-4 px-6">{{ reserve.dateReservation | date: 'shortDate' }}</td>
+            <td class="py-4 px-6">
+              {{ employesMap[reserve.employeId].nom || 'Unknown' }} 
+              {{ employesMap[reserve.employeId].prenom || '' }}
+            </td>
+            
+            <td class="py-4 px-6">{{ reserve.pointDepart }}</td>
+            <td class="py-4 px-6">{{ reserve.destination }}</td>
+            <td class="py-4 px-6">{{ reserve.nombrePlaces }}</td>
+            <td class="py-4 px-6">
+              <button (click)="showEmployeeDetails(reserve.employeId)" class="text-blue-600 hover:text-blue-800">
+                <i class="fas fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="employeeModal" tabindex="-1" aria-hidden="true" *ngIf="selectedEmployee" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto h-modal h-full bg-black bg-opacity-50">
+    <div class="relative w-full max-w-md h-full md:h-auto">
+      <div class="relative bg-white rounded-lg shadow">
+        <div class="flex items-center justify-between p-4 border-b rounded-t bg-blue-600">
+          <h3 class="text-xl font-semibold text-white">Employee Details</h3>
+          <button (click)="closeModal()" class="text-white">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="p-6 text-center">
+          <img [src]="selectedEmployee.imgUrl" alt="Employee Image" class="w-32 h-32 mx-auto rounded-full border-4 border-blue-600 shadow-lg">
+          <h3 class="text-lg font-bold mt-4">{{ selectedEmployee.nom }} {{ selectedEmployee.prenom }}</h3>
+          <p class="text-sm text-gray-600 mt-2">Email: {{ selectedEmployee.email }}</p>
+          <p *ngIf="selectedEmployee.phone" class="text-sm text-gray-600 mt-2">Phone: {{ selectedEmployee.phone }}</p>
+          <p *ngIf="selectedEmployee.address" class="text-sm text-gray-600 mt-2">Address: {{ selectedEmployee.address }}</p>
+        </div>
+        <div class="flex justify-end p-4 border-t border-gray-200">
+          <button (click)="closeModal()" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>

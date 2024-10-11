@@ -1,0 +1,396 @@
+<body class="">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm">
+        <div class="mx-auto px-4 py-4 flex justify-between items-center" style="margin-left: 4%; margin-right: 4%;">
+            <!-- Logo (Hidden on mobile, only shows on medium screens and larger) -->
+            <div class="hidden md:flex items-center">
+                <span>
+                    <span class="text-blue-500 font-bold text-xl">NAVETTE</span>
+                    <span class="text-black font-bold text-xl"> TRANS</span>
+                </span>
+            </div>
+    
+            <!-- Desktop Navigation (Hidden on mobile) -->
+            <!-- <nav class="hidden md:flex space-x-6 font-roboto">
+                <ul class="flex space-x-6">
+                    <li><a href="#" class="nav-link text-blue-500 hover:text-blue-700">Home</a></li>
+                    <li><a href="#" class="nav-link text-gray-600 hover:text-gray-800">Listings</a></li>
+                    <li><a href="#" class="nav-link text-gray-600 hover:text-gray-800">User</a></li>
+                    <li><a href="#" class="nav-link text-gray-600 hover:text-gray-800">Pages</a></li>
+                    <li><a href="#" class="nav-link text-gray-600 hover:text-gray-800">Blog</a></li>
+                    <li><a href="#" class="nav-link text-gray-600 hover:text-gray-800">Contact</a></li>
+                </ul>
+            </nav> -->
+    
+            <!-- Desktop Buttons (Hidden on mobile) -->
+            <div class="hidden md:flex space-x-2">
+                <!-- Login Button -->
+                <button *ngIf="!isLoggedIn" routerLink="/login" class="relative flex items-center justify-center border border-blue-500 rounded text-blue-500 bg-white transition-all duration-300 sm:px-4 sm:py-2 hover:bg-blue-500 hover:text-white">
+                    <span class="relative z-10 flex items-center">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Sign In
+                    </span>
+                </button>
+    
+                <!-- Sign Up Button -->
+                <button *ngIf="!isLoggedIn" routerLink="/register" class="relative flex items-center justify-center border border-blue-500 rounded text-white bg-blue-500 transition-all duration-300 sm:px-4 sm:py-2 hover:bg-white hover:text-blue-500">
+                    <span class="relative z-10 flex items-center">
+                        <i class="fas fa-user-plus mr-2"></i> Sign Up
+                    </span>
+                </button>
+    
+                <!-- Logout Button -->
+                <button *ngIf="isLoggedIn" (click)="logout()" routerLink="/login" class="relative flex items-center justify-center border border-blue-500 rounded text-blue-500 bg-white transition-all duration-300 sm:px-4 sm:py-2 hover:bg-blue-500 hover:text-white">
+                    <span class="relative z-10 flex items-center">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Logout
+                    </span>
+                </button>
+    
+                <!-- Dashboard Button -->
+                <button *ngIf="isLoggedIn" [routerLink]="['/dashboard', authService.getRole()]" class="relative flex items-center justify-center border border-blue-500 rounded text-white bg-blue-500 transition-all duration-300 sm:px-4 sm:py-2 hover:bg-white hover:text-blue-500">
+                    <span class="relative z-10 flex items-center">
+                        <i class="fas fa-user-plus mr-2"></i> Dashboard
+                    </span>
+                </button>
+            </div>            
+        </div>
+    
+        <!-- Mobile Menu -->
+        <div class="md:hidden bg-white w-full" style="margin-left: 4%; margin-right: 4%;">
+            <!-- Logo and Toggle Button on the same line for mobile -->
+            <div class="flex justify-between items-center py-4 px-4">
+                <!-- Toggle Button (Hamburger Menu) -->
+                <div class="flex items-center justify-between w-full md:w-auto">
+                    <div class="flex-none">
+                        <button (click)="toggleMenu()" class="flex items-center justify-center text-gray-700 focus:outline-none">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+    
+                    <!-- Logo Section -->
+                    <div class="flex items-center justify-center w-full md:w-auto">
+                        <span>
+                            <span class="text-blue-500 font-bold text-xl">NAVETTE</span>
+                            <span class="text-black font-bold text-xl"> TRANS</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Menu Links for mobile -->
+            <div [ngClass]="{'hidden': !isMenuOpen}">
+                <ul class="flex flex-col space-y-2 p-4">
+                    <!-- <li><a href="#" class="nav-link text-blue-500 hover:text-blue-700">Home</a></li>
+                    <li><a href="#" class="nav-link text-gray-600 hover:text-gray-800">Listings</a></li>
+                    <li><a href="#" class="nav-link text-gray-600 hover:text-gray-800">User</a></li>
+                    <li><a href="#" class="nav-link text-gray-600 hover:text-gray-800">Pages</a></li>
+                    <li><a href="#" class="nav-link text-gray-600 hover:text-gray-800">Blog</a></li>
+                    <li><a href="#" class="nav-link text-gray-600 hover:text-gray-800">Contact</a></li> -->
+                </ul>
+    
+                <!-- Login and Sign Up Buttons -->
+                <div class="flex flex-col space-y-2 p-4">
+                    <button routerLink="/login" class="relative flex items-center justify-center border border-blue-500 rounded text-blue-500 bg-white py-2 px-4 transition-all duration-300 hover:bg-blue-500 hover:text-white">
+                        <span><i class="fas fa-sign-in-alt mr-2"></i> Sign In</span>
+                    </button>
+    
+                    <button routerLink="/register" class="relative flex items-center justify-center border border-blue-500 rounded text-white bg-blue-500 py-2 px-4 transition-all duration-300 hover:bg-white hover:text-blue-500">
+                        <span><i class="fas fa-user-plus mr-2"></i> Sign Up</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    
+
+
+    <!-- Main Section -->
+    <main class="mx-auto px-4 py-8" style="margin-left: 4%; margin-right: 4%;">
+        <div class="flex flex-col lg:flex-row items-center">
+            <div class="lg:w-1/2 pr-8 mb-8 lg:mb-0">
+                <div class="mb-4">
+                    <span class="bg-blue-100 text-blue-500 px-3 py-1 rounded-full text-sm">100% Trusted car rental
+                        platform in the World</span>
+                </div>
+                <h1 class="text-4xl lg:text-5xl font-bold mb-4">
+                    Find Your Best
+                    <span class="block text-blue-500">Dream Car for Rental</span>
+                </h1>
+                <p class="text-gray-600 mb-6">
+                    Experience the ultimate in comfort, performance, and sophistication with our luxury
+                    car rentals. From sleek sedans and stylish coupes to spacious SUVs and elegant
+                    convertibles, we offer a range of premium vehicles to suit your preferences and
+                    lifestyle.
+                </p>
+                <button class="px-6 py-3 bg-gray-800 text-white rounded-full hover:bg-gray-700 transition">
+                    View all Cars →
+                </button>
+            </div>
+            <div class="lg:w-1/2 relative">
+                <div class="absolute inset-0 transform -skew-y-6 z-0"></div>
+                <img src="https://dreamsrent.dreamstechnologies.com/html/template/assets/img/car-right.png"
+                    alt="Luxury SUV" class="relative z-10 w-full h-auto">
+            </div>
+        </div>
+
+        <!-- <div class="mt-8 bg-white p-6 rounded-lg shadow-md"> -->
+        <app-search></app-search>
+        <!-- </div> -->
+    </main>
+
+
+    <!-- How It Works Section -->
+    <section class="py-12">
+        <div style="margin-left: 4%; margin-right: 4%;">
+            <h1 class="text-3xl font-bold text-center mb-4">How It Works</h1>
+            <div class="underline"></div>
+            <p class="subtitle text-center text-gray-600 mb-8">
+                Booking a car rental is a straightforward process that<br>
+                typically involves the following steps
+            </p>
+            <div class="process-steps flex flex-col md:flex-row flex-wrap justify-between">
+                <div class="step step-1 text-center mb-8 transform transition duration-500 hover:scale-105 hover:shadow-lg">
+                    <div class="step-icon">
+                        <div class="step-icon-inner transition duration-500 ease-in-out transform hover:scale-110 hover:text-blue-500">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Choose Date & Locations</h3>
+                    <p class="text-gray-600">Determine the date & location for your car rental. Consider factors such as
+                        your travel itinerary, pickup/drop-off locations (e.g., airport, city center), and duration of
+                        rental.</p>
+                    <div class="step-line"></div>
+                </div>
+    
+                <div class="step step-2 text-center mb-8 transform transition duration-500 hover:scale-105 hover:shadow-lg">
+                    <div class="step-icon">
+                        <div class="step-icon-inner transition duration-500 ease-in-out transform hover:scale-110 hover:text-blue-500">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Search & Compare</h3>
+                    <p class="text-gray-600">Use our search tool to find available cars based on your criteria. Compare
+                        options, considering factors like car type, price, and rental conditions to find the best fit
+                        for your needs.</p>
+                    <div class="step-line"></div>
+                </div>
+    
+                <div class="step step-3 text-center mb-8 transform transition duration-500 hover:scale-105 hover:shadow-lg">
+                    <div class="step-icon">
+                        <div class="step-icon-inner transition duration-500 ease-in-out transform hover:scale-110 hover:text-blue-500">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Book & Pay</h3>
+                    <p class="text-gray-600">Once you've selected a car, proceed to book it by filling in your personal
+                        details and payment information. You may also have the option to add extra services like
+                        insurance or GPS.</p>
+                    <div class="step-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2 class="title">Most Popular Cartypes</h2>
+        <p class="subtitle">
+            Most popular worldwide Car Category due to their reliability, affordability, and features.
+        </p>
+
+        <div class="scroll-container">
+            <button (click)="scroll(-1)" class="scroll-button left">&larr;</button>
+
+            <div #scrollContainer class="car-types-container">
+                <div *ngFor="let carType of carTypes" class="car-type">
+                    <div class="icon-container">
+                        <img [src]="carType.icon" [alt]="carType.name" class="icon">
+                    </div>
+                    <h3 class="car-name">{{ carType.name }}</h3>
+                    <p class="car-count">{{ carType.count }} Cars</p>
+                </div>
+            </div>
+
+            <button (click)="scroll(1)" class="scroll-button right">&rarr;</button>
+        </div>
+    </div>
+
+    <section class="testimonials py-12 bg-black text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4 text-white glow-effect">What People say about us?</h2>
+            <div class="underline mx-auto mb-4" style="width: 50px; height: 4px; background-color: #FFA500;"></div>
+            <p class="subtitle text-center text-gray-400 mb-8">Discover what our customers think about us</p>
+
+            <div class="testimonial-container flex flex-wrap justify-center gap-8">
+                <!-- Testimonial Card 1 -->
+                <div class="testimonial-card bg-gray-800 p-6 rounded-lg shadow-md max-w-md w-full relative">
+                    <div class="user-info flex items-center mb-4">
+                        <img src="https://mighty.tools/mockmind-api/content/human/65.jpg" alt="Rabien Ustoc"
+                            class="user-image w-12 h-12 rounded-full mr-4 border-2 border-orange-400">
+                        <div class="user-details">
+                            <h3 class="font-semibold text-white">Rabien Ustoc</h3>
+                            <p class="text-gray-400">New York, USA</p>
+                        </div>
+                    </div>
+                    <p class="review text-gray-300 mb-4">Renting a car from Dreams rent made my vacation so much
+                        smoother! The process was quick and easy, the car was clean and well-maintained, and the staff
+                        were friendly and helpful.</p>
+                    <div class="rating text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-400 ml-2">(5.0)</span>
+                    </div>
+                    <div class="quote-mark absolute top-4 right-4 text-6xl text-orange-500 opacity-25">“</div>
+                </div>
+
+                <!-- Testimonial Card 2 -->
+                <div class="testimonial-card bg-gray-800 p-6 rounded-lg shadow-md max-w-md w-full relative">
+                    <div class="user-info flex items-center mb-4">
+                        <img src="https://mighty.tools/mockmind-api/content/human/44.jpg" alt="Valerie L. Ellis"
+                            class="user-image w-12 h-12 rounded-full mr-4 border-2 border-orange-400">
+                        <div class="user-details">
+                            <h3 class="font-semibold text-white">Valerie L. Ellis</h3>
+                            <p class="text-gray-400">Las Vegas, USA</p>
+                        </div>
+                    </div>
+                    <p class="review text-gray-300 mb-4">As a frequent business traveller, I rely on Dreams rent for all
+                        my needs. Their wide selection of vehicles, convenient locations, and competitive prices make
+                        them my go-to choice every time. Plus, their customer service is top-notch!</p>
+                    <div class="rating text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-400 ml-2">(5.0)</span>
+                    </div>
+                    <div class="quote-mark absolute top-4 right-4 text-6xl text-orange-500 opacity-25">“</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="bg-white dark:bg-gray-900 w-full">
+        <!-- Main Container -->
+        <div class="w-full max-w-[92%] mx-auto p-4 md:p-6 lg:p-8"> <!-- Added responsive padding -->
+            <!-- Main Footer Content -->
+            <div class="grid grid-cols-1 gap-8 py-8 sm:grid-cols-2 lg:grid-cols-4">
+                <!-- Company Info -->
+                <div class="w-full">
+                    <div class="mb-4">
+                        <span class="text-blue-500 font-bold text-xl">NAVETTE</span>
+                        <span class="text-black dark:text-white font-bold text-xl"> TRANS</span>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm">
+                        Experience luxury and comfort with our premium car rental services. Book your dream car today.
+                    </p>
+                    <div class="flex mt-4 space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+    
+                <!-- Company Links -->
+                <div class="w-full">
+                    <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Company</h2>
+                    <ul class="text-gray-500 dark:text-gray-400 text-sm">
+                        <li class="mb-3">
+                            <a href="#" class="hover:text-blue-500 transition-colors">About Us</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#" class="hover:text-blue-500 transition-colors">Careers</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#" class="hover:text-blue-500 transition-colors">Blog</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#" class="hover:text-blue-500 transition-colors">Press</a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Support Links -->
+                <div class="w-full">
+                    <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Support</h2>
+                    <ul class="text-gray-500 dark:text-gray-400 text-sm">
+                        <li class="mb-3">
+                            <a href="#" class="hover:text-blue-500 transition-colors">Contact Us</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#" class="hover:text-blue-500 transition-colors">FAQ</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#" class="hover:text-blue-500 transition-colors">Terms &amp; Conditions</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#" class="hover:text-blue-500 transition-colors">Privacy Policy</a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Newsletter -->
+                <div class="w-full">
+                    <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Newsletter</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4 text-sm">
+                        Subscribe to our newsletter for updates and exclusive offers.
+                    </p>
+                    <form class="flex items-center">
+                        <div class="relative w-full">
+                            <input type="email" 
+                                   class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
+                                   placeholder="Enter your email"
+                                   required>
+                            <button type="submit" 
+                                    class="absolute right-2.5 bottom-2.5 text-blue-500 hover:text-blue-700 focus:outline-none">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Divider -->
+            <hr class="border-gray-200 dark:border-gray-700">
+    
+            <!-- Bottom Bar -->
+            <div class="py-6 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+                <!-- Copyright -->
+                <div class="text-sm text-gray-500 dark:text-gray-400 text-center sm:text-left">
+                    © 2024 <a href="#" class="hover:text-blue-500">NAVETTE TRANS™</a>. All Rights Reserved.
+                </div>
+    
+                <!-- Payment Methods -->
+                <div class="flex space-x-4 justify-center">
+                    <a href="#" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                        <i class="fab fa-cc-visa text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                        <i class="fab fa-cc-mastercard text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                        <i class="fab fa-cc-paypal text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                        <i class="fab fa-cc-apple-pay text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+</body>

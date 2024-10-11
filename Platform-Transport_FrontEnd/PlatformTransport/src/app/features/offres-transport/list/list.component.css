@@ -24,3 +24,22 @@ body {
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   }
+
+
+  mat-dialog-content {
+    padding: 20px;
+    max-width: 400px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  mat-dialog-actions {
+    padding: 10px;
+  }
+  
+  button {
+    margin: 5px;
+  }
+  

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { OffreTransport } from '../models/OffreTransport'; // Adjust the path as necessary
+import { OffreTransport } from '../models/OffreTransport';
 
 @Injectable({
   providedIn: 'root'
@@ -22,19 +22,23 @@ export class OffreTransportService {
       .pipe(catchError(this.handleError));
   }
 
-  createOffreTransport(offreTransport: OffreTransport, token: string): Observable<OffreTransport> {
-    const headers = new HttpHeaders().set('Authorization', token);
-    return this.http.post<OffreTransport>(`${this.baseUrl}/add`, offreTransport, { headers })
+  createOffreTransport(offreTransport: OffreTransport): Observable<OffreTransport> {
+    return this.http.post<OffreTransport>(`${this.baseUrl}/add`, offreTransport)
       .pipe(catchError(this.handleError));
   }
 
+  getAllOffresTransportsByPagination(page: number, limit: number): Observable<OffreTransport[]> {
+    return this.http.get<OffreTransport[]>(`${this.baseUrl}/all?page=${page}&limit=${limit}`)
+      .pipe(catchError(this.handleError));
+  }
+  
   updateOffreTransport(id: number, offreTransport: OffreTransport): Observable<OffreTransport> {
     return this.http.put<OffreTransport>(`${this.baseUrl}/${id}`, offreTransport)
       .pipe(catchError(this.handleError));
   }
 
-  deleteOffreTransport(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`)
+  deleteOffreTransport(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`)
       .pipe(catchError(this.handleError));
   }
 
@@ -43,11 +47,17 @@ export class OffreTransportService {
       .pipe(catchError(this.handleError));
   }
 
-  getOffreTransportByEmployeur(token: string): Observable<OffreTransport[]> {
-    const headers = new HttpHeaders().set('Authorization', token);
-    return this.http.get<OffreTransport[]>(`${this.baseUrl}/offreByEmployeur`, { headers })
+  getApprovedOffreById(id: number): Observable<OffreTransport> {
+    return this.http.get<OffreTransport>(`${this.baseUrl}/approved/${id}`)
       .pipe(catchError(this.handleError));
   }
+
+  getOffreTransportByEmployeur(): Observable<OffreTransport[]> {
+    return this.http.get<OffreTransport[]>(`${this.baseUrl}/offreByEmployeur`).pipe(
+      catchError(this.handleError)
+    );
+}
+
 
   getRejectedOffreTransports(): Observable<OffreTransport[]> {
     return this.http.get<OffreTransport[]>(`${this.baseUrl}/rejected`)

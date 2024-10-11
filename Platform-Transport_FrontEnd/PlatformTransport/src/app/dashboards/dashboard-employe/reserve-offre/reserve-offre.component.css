@@ -1,0 +1,29 @@
+.offre-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .offre-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .reserve-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+  }
+  
+  .reservation-form {
+    margin-top: 16px;
+  }
+  
+  button {
+    margin-top: 8px;
+  }
+  

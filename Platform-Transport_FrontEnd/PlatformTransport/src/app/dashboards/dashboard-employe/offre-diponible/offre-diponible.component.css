@@ -1,25 +1,65 @@
-body {
-    background-image: url('https://www.canvasprintsaustralia.net.au/wp-content/uploads/2018/10/travel-map-with-push-pins-edited.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #333;
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-  }
-  .overlay {
-    background-color: rgba(128, 128, 128, 0.6); /* Grey overlay with opacity */
-    min-height: 100vh;
-  }
-  .container {
-    position: relative;
-    z-index: 1; /* Ensures content is above overlay */
-  }
-  /* Animation for card hover effect */
-  .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  }
+/* body {
+  background-color: rgba(5, 35, 232, 0.231);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #333;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.overlay {
+  background-color: rgba(128, 128, 128, 0.6);
+  min-height: 100vh;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+button {
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1e40af;}
+
+
+
+ */
+ .card-bg {
+  position: relative;
+  overflow: hidden;
+}
+.card-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+.content {
+  position: relative;
+  z-index: 1;
+}
+.background-image {
+  background-size: cover;
+  background-position: center;
+  opacity: 0.9;
+}

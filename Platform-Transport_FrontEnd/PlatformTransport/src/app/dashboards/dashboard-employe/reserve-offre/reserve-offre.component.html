@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main class="p-4 sm:ml-64 pt-20 bg-white text-gray-900">
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <div class="grid grid-cols-1 gap-4">
+      <div class="p-6 bg-gray-100 rounded-lg shadow-lg">
+        <label for="typeOffreTransport" class="block text-sm font-medium text-gray-700">Type of Offer</label>
+        <input id="typeOffreTransport" formControlName="typeOffreTransport" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500" />
+
+        <label for="pointDepart" class="block text-sm font-medium text-gray-700 mt-4">From</label>
+        <input id="pointDepart" formControlName="pointDepart" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500" />
+
+        <label for="destination" class="block text-sm font-medium text-gray-700 mt-4">To</label>
+        <input id="destination" formControlName="destination" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500" />
+
+        <label for="dateOffre" class="block text-sm font-medium text-gray-700 mt-4">Date</label>
+        <input id="dateOffre" formControlName="dateOffre" type="date" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500" />
+
+        <label for="nombrePlaces" class="block text-sm font-medium text-gray-700 mt-4">Seats Available</label>
+        <input id="nombrePlaces" formControlName="nombrePlaces" type="number" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500" />
+
+        <label for="prix" class="block text-sm font-medium text-gray-700 mt-4">Price</label>
+        <input id="prix" formControlName="prix" type="number" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500" />
+
+        <label for="imgUrl" class="block text-sm font-medium text-gray-700 mt-4">Image URL</label>
+        <input id="imgUrl" formControlName="imgUrl" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500" />
+
+        <!-- <label for="status" class="block text-sm font-medium text-gray-700 mt-4">Status</label>
+        <select id="status" formControlName="status" class="mt-1 block w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900">
+          <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+        </select> -->
+
+        <button type="submit" class="mt-6 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300">
+          Update
+        </button>
+
+        <!-- Approve and Reject Buttons -->
+        
+      </div>
+    </div>
+  </form>
+</main>

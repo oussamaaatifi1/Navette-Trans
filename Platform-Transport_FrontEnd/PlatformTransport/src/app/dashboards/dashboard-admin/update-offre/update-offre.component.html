@@ -31,7 +31,7 @@
           <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
         </select> -->
 
-        <button type="submit" class="mt-6 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300">
+        <button *ngIf="isEmployeur()" type="submit" class="mt-6 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300">
           Update
         </button>
 

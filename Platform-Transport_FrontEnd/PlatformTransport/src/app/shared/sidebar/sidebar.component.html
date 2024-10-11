@@ -4,7 +4,7 @@
     <div class="h-full px-3 pb-4 overflow-y-auto bg-blue-800">
         <ul class="space-y-2 font-medium">
             <li *ngIf="isAdmin()">
-                <a (click)="loadContent('admin-count')" [ngClass]="{'bg-blue-700': currentSection === 'admin-count'}"
+                <a (click)="loadContent('dashboard/ADMIN')" [ngClass]="{'bg-blue-700': currentSection === 'dashboard/ADMIN'}"
                     class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
                     <span class="ms-3">Dashboard</span>
                 </a>
@@ -25,7 +25,7 @@
                <div class="h-full px-3 pb-4 overflow-y-auto bg-blue-800">
                    <ul class="space-y-2 font-medium">
                        <li *ngIf="isAdmin()">
-                           <a (click)="loadContent('admin-count')" [ngClass]="{'bg-blue-700': currentSection === 'admin-count'}"
+                           <a (click)="loadContent('dashboard/ADMIN')" [ngClass]="{'bg-blue-700': currentSection === 'dashboard/ADMIN'}"
                                class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
                                <span class="ms-3">Dashboard</span>
                            </a>
@@ -37,17 +37,18 @@
                           </a>
                        </li>
                        <li *ngIf="isEmployeur()">
+                        <a (click)="loadContent('dashboard/EMPLOYEUR')" [ngClass]="{'bg-blue-700': currentSection === 'dashboard/EMPLOYEUR'}"
+                            class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
+                            <span class="flex-1 ms-3 whitespace-nowrap">Dashboard</span>
+                       </a>
+                    </li>
+                       <li *ngIf="isEmployeur()">
                            <a (click)="loadContent('listOffre')" [ngClass]="{'bg-blue-700': currentSection === 'listOffre'}"
                                class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
                                <span class="flex-1 ms-3 whitespace-nowrap">Management Offers</span>
                           </a>
                        </li>
-                       <li *ngIf="isEmployeur()">
-                           <a (click)="loadContent('CreateOffre')" [ngClass]="{'bg-blue-700': currentSection === 'CreateOffre'}"
-                               class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
-                               <span class="flex-1 ms-3 whitespace-nowrap">Create Offers</span>
-                          </a>
-                       </li>
+
                        <li *ngIf="isAdmin()">
                            <a (click)="loadContent('listemploye')" [ngClass]="{'bg-blue-700': currentSection === 'listemploye'}"
                                class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
@@ -60,15 +61,21 @@
                                <span class="flex-1 ms-3 whitespace-nowrap">List employeur</span>
                            </a>
                        </li>
+                       <li *ngIf="isEmployeur()">
+                        <a (click)="loadContent('listreservation')" [ngClass]="{'bg-blue-700': currentSection === 'listreservation'}"
+                            class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
+                            <span class="flex-1 ms-3 whitespace-nowrap">List Reservation</span>
+                        </a>
+                    </li>
                    </ul>
                </div>
            </aside>
            
             </li>
             <li *ngIf="isEmployeur()">
-                <a (click)="loadContent('CreateOffre')" [ngClass]="{'bg-blue-700': currentSection === 'CreateOffre'}"
+                <a (click)="loadContent('listreservation')" [ngClass]="{'bg-blue-700': currentSection === 'listreservation'}"
                     class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
-                    <span class="flex-1 ms-3 whitespace-nowrap">Create Offers</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">List Reservation</span>
                </a>
             </li>
             <li *ngIf="isAdmin()">
@@ -87,6 +94,12 @@
                 <a (click)="loadContent('listdispo')" [ngClass]="{'bg-blue-700': currentSection === 'listdispo'}"
                     class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
                     <span class="flex-1 ms-3 whitespace-nowrap">List employeur</span>
+                </a>
+            </li>
+            <li *ngIf="isEmployeur()">
+                <a (click)="loadContent('listreservation')" [ngClass]="{'bg-blue-700': currentSection === 'listreservation'}"
+                    class="flex items-center p-2 text-white rounded-lg hover:bg-blue-700 group">
+                    <span class="flex-1 ms-3 whitespace-nowrap">List Reservation</span>
                 </a>
             </li>
         </ul>

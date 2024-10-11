@@ -37,7 +37,7 @@
                                     <div class="text-sm text-gray-500">ID: {{ employe.id }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ employe.prenom}}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ employe.prenom }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">{{ employe.email }}</div>
@@ -53,14 +53,8 @@
                                     </span>
                                 </td>
                                 <td class="py-4 px-6 flex space-x-2">
-                                    <button (click)="updateEmploye(employe.id)" 
-                                            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
-                                        Edit
-                                    </button>
-                                    <button (click)="deleteEmploye(employe.id)" 
-                                            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
-                                        Delete
-                                    </button>
+                                    <button (click)="updateEmploye(employe.id)" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Edit</button>
+                                    <button (click)="deleteEmploye(employe.id)" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">Delete</button>
                                 </td>
                             </tr>
                         </tbody>

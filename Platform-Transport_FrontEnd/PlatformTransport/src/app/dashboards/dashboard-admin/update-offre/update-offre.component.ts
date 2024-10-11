@@ -87,7 +87,7 @@ export class UpdateOffreComponent implements OnInit {
   }
 
   reject(): void {
-    this.offreTransportService.approveOffre(this.offreTransportId).subscribe(
+    this.offreTransportService.rejectOffre(this.offreTransportId).subscribe(  // Fixed method to reject offer
       () => {
         this.updateForm.get('status')?.setValue(OffreStatus.REJECTED);
         this.router.navigate(['/offrebyadmin']);
@@ -97,7 +97,12 @@ export class UpdateOffreComponent implements OnInit {
       }
     );
   }
+
   isAdmin(): boolean {
     return this.role?.toString() === Role[Role.ADMIN];
+  }
+
+  isEmployeur(): boolean {
+    return this.role?.toString() === Role[Role.EMPLOYEUR];
   }
 }
